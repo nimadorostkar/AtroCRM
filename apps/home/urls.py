@@ -19,6 +19,10 @@ urlpatterns = [
     path('customers', views.customers, name='customers'),
     path('customer_detail/<int:id>/',views.customer_detail,name='customer_detail'),
 
+    # Order_request
+    path('order_requests', views.order_requests, name='order_requests'),
+    path('order_req_detail/<int:id>/',views.order_req_detail,name='order_req_detail'),
+
     # Matches any html file
     #re_path(r'^.*\.*', views.pages, name='pages'),
 ]

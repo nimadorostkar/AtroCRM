@@ -105,6 +105,27 @@ def customer_detail(request, id):
 
 
 
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def order_requests(request):
+    reqs = models.Order_request.objects.all()
+    context = {'reqs': reqs }
+    #context = {'segment': 'products'}
+    html_template = loader.get_template('home/order_requests.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+@login_required()
+def order_req_detail(request, id):
+    req = get_object_or_404(models.Order_request, id=id)
+    context = {'req':req}
+    return render(request, 'home/order_req_detail.html', context)
+
+
+
+
+
+
 
 
 
