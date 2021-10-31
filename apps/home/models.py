@@ -26,7 +26,7 @@ class Product(models.Model):
         return format_html("<img width=50 src='{}'>".format(self.image.url))
 
     def get_absolute_url(self):
-        return reverse('app:product_detail',args=[self.id])
+        return reverse('product_detail',args=[self.id])
 
     @property
     def short_description(self):

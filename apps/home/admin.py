@@ -4,7 +4,6 @@ from django.contrib.admin.models import LogEntry
 from .models import Product, Customer, Order_request, Order_steps
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin, ImportExportMixin
-from mptt.admin import MPTTModelAdmin, TreeRelatedFieldListFilter, DraggableMPTTAdmin
 from jalali_date import datetime2jalali, date2jalali
 from jalali_date.admin import ModelAdminJalaliMixin, StackedInlineJalaliMixin, TabularInlineJalaliMixin
 

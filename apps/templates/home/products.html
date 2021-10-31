@@ -33,17 +33,20 @@
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm"> {{ Product.name }} </h6>
+                          <a href="{{ Product.get_absolute_url }}"> <h6 class="mb-0 text-sm"> {{ Product.name }} </h6> </a>
                           <p class="text-xs text-secondary mb-0"> {{ Product.description|slice:":50" }}... </p>
                         </div>
                       </div>
                     </td>
                     <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-success">موجود</span>
-                      <span class="badge badge-sm bg-gradient-secondary">نا موجود</span>
+                      {% if Product.available %}
+                        <span class="badge badge-sm bg-gradient-success">موجود</span>
+                      {% else %}
+                        <span class="badge badge-sm bg-gradient-secondary">نا موجود</span>
+                      {% endif %}
                     </td>
                     <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold"> {{ Product.price }}  </span>
+                      <span class="text-secondary text-xs font-weight-bold"> {{ Product.price }} ریال </span>
                     </td>
                     <td class="align-middle text-center">
                       <div>

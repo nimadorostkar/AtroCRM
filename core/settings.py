@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jalali_date',
     'import_export',
-    'bootstrapform',
     'apps.home'  # Enable the inner home (home)
 ]
 

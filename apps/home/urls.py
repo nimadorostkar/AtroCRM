@@ -13,7 +13,7 @@ urlpatterns = [
 
     # Product
     path('products', views.products, name='products'),
-    #path('product_detail/<int:id>/',views.product_detail,name='product_detail'),
+    path('product_detail/<int:id>/',views.product_detail,name='product_detail'),
 
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),

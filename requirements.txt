@@ -1,8 +1,4 @@
-asgiref
-autopep8
-dj-database-url
 Django
-gunicorn
 pycodestyle
 python-decouple
 pytz
@@ -11,10 +7,5 @@ toml
 Unipath
 whitenoise
 Pillow
-django-allauth
-django-bootstrap-form
 django-import-export
-django-mptt
 django-jalali-date
-django-jalali
-django-mathfilters

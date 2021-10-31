@@ -73,6 +73,26 @@ def products(request):
     return HttpResponse(html_template.render(context, request))
 
 
+@login_required()
+def product_detail(request, id):
+    product = get_object_or_404(models.Product, id=id)
+    context = {'product':product}
+    return render(request, 'product_detail.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
