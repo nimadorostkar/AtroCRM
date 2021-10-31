@@ -3,7 +3,7 @@ from apps.home import views
 
 
 
-app_name='app'
+#app_name='home'
 
 
 

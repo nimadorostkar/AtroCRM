@@ -13,8 +13,8 @@ from django_jalali.db import models as jmodels
 #------------------------------------------------------------------------------
 class Product(models.Model):
     available = models.BooleanField(default=True, verbose_name = "موجود" )
-    name = models.CharField(max_length=200, null=True,verbose_name = "نام")
-    price = models.FloatField(null=True,verbose_name = "قیمت ( ریال )")
+    name = models.CharField(max_length=200, unique=True, verbose_name = "نام")
+    price = models.CharField(max_length=200, verbose_name = "قیمت ( ریال )")
     description = models.TextField(max_length=900,null=True, blank=True,verbose_name = "توضیحات")
     image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
     date_created = models.DateField(auto_now_add=True, verbose_name = "تاریخ")

@@ -68,12 +68,9 @@ def pages(request):
 def products(request):
     products = models.Product.objects.all()
     context = {'products': products }
-    context = {'segment': 'products'}
+    #context = {'segment': 'products'}
     html_template = loader.get_template('home/products.html')
     return HttpResponse(html_template.render(context, request))
-
-
-
 
 
 
