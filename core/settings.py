@@ -29,6 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jalali_date',
+    'import_export',
+    'bootstrapform',
     'apps.home'  # Enable the inner home (home)
 ]
 
@@ -75,6 +78,13 @@ DATABASES = {
         'NAME': 'db.sqlite3',
     }
 }
+
+
+
+
+
+DEFAULT_AUTO_FIELD='django.db.models.BigAutoField'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
