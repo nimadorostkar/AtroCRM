@@ -16,5 +16,5 @@ urlpatterns = [
     path('product_detail/<int:id>/',views.product_detail,name='product_detail'),
 
     # Matches any html file
-    re_path(r'^.*\.*', views.pages, name='pages'),
+    #re_path(r'^.*\.*', views.pages, name='pages'),
 ]
