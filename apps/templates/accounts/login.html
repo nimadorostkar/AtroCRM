@@ -14,9 +14,10 @@
           <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto" dir="rtl">
             <div class="card card-plain mt-8">
               <div class="card-header pb-0 text-left bg-transparent">
-                <h4 class="text-info text-gradient" align="right">
-                  نرم افزار سی آر ام آتـــروتـک  -  ورود
-                </h4>
+                <h6 class="text-info text-gradient" align="right">
+                  نرم افزار مدیریت فروش و ارتباط با مشتریان AtroCRM
+                </h6>
+                <h4 align="right" class="text-info text-gradient"> ورود </h4>
                 <p class="mb-0" align="right">
                     {% if msg %}
                         {{ msg | safe }}
@@ -30,11 +31,11 @@
 
                   {% csrf_token %}
 
-                  <label>Username</label>
+                  <label>نام کاربری</label>
                   <div class="mb-3">
                     {{ form.username }}
                   </div>
-                  <label>Password</label>
+                  <label>کلمه عبور</label>
                   <div class="mb-3">
                     {{ form.password }}
                   </div>
