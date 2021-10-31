@@ -17,7 +17,7 @@ class Product(models.Model):
     price = models.CharField(max_length=200, verbose_name = "قیمت ( ریال )")
     description = models.TextField(max_length=900,null=True, blank=True,verbose_name = "توضیحات")
     image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
-    date_created = models.DateField(auto_now_add=True, verbose_name = "تاریخ")
+    date_created = jmodels.jDateField(auto_now_add=True, verbose_name = "تاریخ")
 
     def __str__(self):
         return self.name
@@ -52,7 +52,7 @@ class Customer(models.Model):
     phone = models.CharField(max_length=200, null=True,verbose_name = "تلفن")
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     product_tag = models.ManyToManyField(Product, blank=True, verbose_name = "تگ محصولی")
-    date_created = models.DateField(auto_now_add=True, verbose_name = "تاریخ")
+    date_created = jmodels.jDateField(auto_now_add=True, verbose_name = "تاریخ")
 
     def __str__(self):
         return self.name
@@ -84,7 +84,7 @@ class Order_request(models.Model):
     discount = models.IntegerField(default='0', verbose_name = "درصد تخفیف" )
     CHOICES = ( ('تکمیل شده','تکمیل شده'), ('لغو شده','لغو شده'), ('دریافت پیش پرداخت','دریافت پیش پرداخت'), ('پرداخت شده','پرداخت شده'), ('در حال بررسی','در حال بررسی') )
     status= models.CharField(max_length=30,choices=CHOICES, default='در حال بررسی', verbose_name = "وضعیت")
-    date_created = models.DateField(auto_now_add=True, verbose_name = "تاریخ")
+    date_created = jmodels.jDateField(auto_now_add=True, verbose_name = "تاریخ")
 
 
     def __str__(self):
@@ -108,7 +108,7 @@ class Order_steps(models.Model):
     CHOICES = ( ('اول','اول'), ('دوم','دوم'), ('سوم','سوم'), ('چهارم','چهارم'), ('پنجم','پنجم'), ('ششم','ششم'), ('هفتم','هفتم'), ('هشتم','هشتم'), ('نهم','نهم'), ('دهم','دهم') )
     step=models.CharField(max_length=20,choices=CHOICES, verbose_name = "گام")
     description = models.TextField(max_length=1000, null=True, blank=True, verbose_name = "توضیحات")
-    date_created = models.DateField(auto_now_add=True, verbose_name = "تاریخ")
+    date_created = jmodels.jDateField(auto_now_add=True, verbose_name = "تاریخ")
 
 
     def __str__(self):
