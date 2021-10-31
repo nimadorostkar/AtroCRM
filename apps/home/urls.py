@@ -15,6 +15,10 @@ urlpatterns = [
     path('products', views.products, name='products'),
     path('product_detail/<int:id>/',views.product_detail,name='product_detail'),
 
+    # Customer
+    path('customers', views.customers, name='customers'),
+    path('customer_detail/<int:id>/',views.customer_detail,name='customer_detail'),
+
     # Matches any html file
     #re_path(r'^.*\.*', views.pages, name='pages'),
 ]

@@ -83,6 +83,32 @@ def product_detail(request, id):
 
 
 
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def customers(request):
+    customers = models.Customer.objects.all()
+    context = {'customers': customers }
+    #context = {'segment': 'products'}
+    html_template = loader.get_template('home/customers.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+@login_required()
+def customer_detail(request, id):
+    customer = get_object_or_404(models.Customer, id=id)
+    context = {'customer':customer}
+    return render(request, 'home/customer_detail.html', context)
+
+
+
+
+
+
+
+
+
+
+
 
 
 

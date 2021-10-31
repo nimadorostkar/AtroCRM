@@ -16,7 +16,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200, unique=True, verbose_name = "نام")
     price = models.CharField(max_length=200, verbose_name = "قیمت ( ریال )")
     description = models.TextField(max_length=900,null=True, blank=True,verbose_name = "توضیحات")
-    image = models.ImageField(upload_to='media', default='media/Default.png', null=True, blank=True, verbose_name = "تصویر")
+    image = models.ImageField(upload_to='media', default='media/Default.png', verbose_name = "تصویر")
     date_created = jmodels.jDateField(auto_now_add=True, verbose_name = "تاریخ")
 
     def __str__(self):
@@ -57,9 +57,12 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('customer_detail',args=[self.id])
+
     @property
     def short_description(self):
-        return truncatechars(self.description, 70)
+        return truncatechars(self.additional_information, 70)
 
     class Meta:
         verbose_name = "مشتری"
