@@ -11,23 +11,23 @@
     <div class="page-header section-height-75">
       <div class="container">
         <div class="row">
-          <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
+          <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto" dir="rtl">
             <div class="card card-plain mt-8">
               <div class="card-header pb-0 text-left bg-transparent">
-                <h4 class="text-info text-gradient">
-                  Django Soft Dashboard - Login
+                <h4 class="text-info text-gradient" align="right">
+                  نرم افزار سی آر ام آتـــروتـک  -  ورود
                 </h4>
-                <p class="mb-0">
+                <p class="mb-0" align="right">
                     {% if msg %}
                         {{ msg | safe }}
                     {% else %}
-                        Add your credentials
-                    {% endif %}                  
+                        لطفا اطلاعات خود را وارد کنید
+                    {% endif %}
                 </p>
               </div>
               <div class="card-body">
                 <form role="form text-left" method="post" action="">
-                  
+
                   {% csrf_token %}
 
                   <label>Username</label>
@@ -38,21 +38,16 @@
                   <div class="mb-3">
                     {{ form.password }}
                   </div>
-                  <div class="form-check form-switch">
+                  <div class="form-check form-switch" dir="ltr">
                     <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                    <label class="form-check-label" for="rememberMe"> مرا به خاطر بسپار </label>
                   </div>
                   <div class="text-center">
-                    <button type="submit" name="login" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                    <button type="submit" name="login" class="btn bg-gradient-info w-100 mt-4 mb-0"> ورود </button>
                   </div>
                 </form>
               </div>
-              <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                <p class="mb-4 text-sm mx-auto">
-                  Don't have an account?
-                  <a href="{% url 'register' %}" class="text-info text-gradient font-weight-bold">Sign UP</a>
-                </p>
-              </div>
+
             </div>
           </div>
           <div class="col-md-6">
@@ -67,7 +62,7 @@
 
 {% endblock content %}
 
-<!-- Specific JS goes HERE --> 
+<!-- Specific JS goes HERE -->
 {% block javascripts %}
 
   <script>
