@@ -70,7 +70,7 @@ class Customer(models.Model):
 class Order_req(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name = "کارشناس فروش")
     customer = models.ForeignKey(Customer ,on_delete=models.CASCADE, verbose_name = "خریدار")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE,verbose_name = "محصول")
+    product = models.ForeignKey(Product ,on_delete=models.CASCADE, verbose_name = "محصول")
     description=models.TextField(max_length=1000, null=True, blank=True, verbose_name = "توضیحات")
     discount = models.IntegerField(default='0', verbose_name = "درصد تخفیف" )
     CHOICES = ( ('تکمیل شده','تکمیل شده'), ('لغو شده','لغو شده'), ('دریافت پیش پرداخت','دریافت پیش پرداخت'), ('پرداخت شده','پرداخت شده'), ('در حال بررسی','در حال بررسی') )
@@ -79,7 +79,7 @@ class Order_req(models.Model):
 
 
     def __str__(self):
-        return ' شماره درخواست ' + str(self.id) + ' توسط ' + self.user.username + ' برای ' + self.customer.name + ' در تاریخ ' + str(self.date_created)
+        return self.product.name
 
     #def get_absolute_url(self):
         #return reverse('app:order_req_detail',args=[self.id])
