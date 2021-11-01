@@ -51,6 +51,7 @@ class Customer(models.Model):
     name = models.CharField(max_length=200, null=True,verbose_name = "نام")
     phone = models.CharField(max_length=200, null=True,verbose_name = "تلفن")
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
+    #substantial = models.BooleanField(default=False, verbose_name = " قابل توجه " )
     product_tag = models.ManyToManyField(Product, blank=True, verbose_name = "تگ محصولی")
     date_created = jmodels.jDateField(auto_now_add=True, verbose_name = "تاریخ")
 

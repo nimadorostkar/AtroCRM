@@ -42,6 +42,90 @@
      </div>
 
 
+     <br><br>
+
+
+     <div class="row" dir="rtl">
+       <div class="col-12">
+         <div class="card mb-4">
+           <div class="card-header pb-0">
+             <h6> سفارشات مربوط به این محصول: </h6>
+           </div>
+           <div class="card-body px-0 pt-0 pb-2">
+             <div class="table-responsive p-0">
+               <table class="table align-items-center mb-0">
+                 <thead>
+                   <tr>
+                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام مشتری </th>
+                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> محصول </th>
+                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تعداد </th>
+                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
+                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> کارشناس فروش </th>
+                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> درصد تخفیف </th>
+                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تاریخ </th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                  {% for Order_request in reqs %}
+                   <tr>
+                     <td>
+                       <div class="d-flex px-2 py-1">
+                         <div class="d-flex flex-column justify-content-center">
+                           <a href="{{ Order_request.get_absolute_url }}">
+                             <h6 class="mb-0 text-sm">
+                               <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
+                               {{ Order_request.customer.name }}
+                            </h6>
+                          </a>
+                         </div>
+                       </div>
+                     </td>
+
+                     <td class="align-middle text-center text-sm">
+                       <p class="text-xs text-secondary mb-0"> <img src="{{ Order_request.product.image.url }}" class="avatar avatar-sm me-3"> {{ Order_request.product.name }} </p>
+                     </td>
+
+                     <td class="align-middle text-center">
+                       <p class="text-xs text-secondary mb-0"> {{ Order_request.qty }} عدد </p>
+                     </td>
+
+                     <td class="align-middle text-center">
+                       {% if Order_request.status == 'تکمیل شده' %}
+                         <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
+                       {% elif Order_request.status == 'لغو شده' %}
+                         <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
+                       {% elif Order_request.status == 'دریافت پیش پرداخت' %}
+                         <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
+                       {% else %}
+                         <span class="badge badge-sm bg-gradient-warning"> در حال بررسی </span>
+                       {% endif %}
+                     </td>
+
+                     <td class="align-middle text-center">
+                       <p class="text-xs text-secondary mb-0"> {{ Order_request.user }} </p>
+                     </td>
+
+                     <td class="align-middle text-center">
+                       <p class="text-xs text-secondary mb-0"> {{ Order_request.discount }} ٪ </p>
+                     </td>
+
+                     <td class="align-middle text-center">
+                       <p class="text-xs text-secondary mb-0"> {{ Order_request.date_created }} </p>
+                     </td>
+
+                   </tr>
+                  {% endfor %}
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+
+
+
      {% include "includes/footer.html" %}
 
    </div>

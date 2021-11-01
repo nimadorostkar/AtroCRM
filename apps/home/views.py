@@ -30,38 +30,6 @@ def index(request):
 
 
 
-
-
-#------------------------------------------------------------------------------
-@login_required(login_url="/login/")
-def pages(request):
-    context = {}
-    # All resource paths end in .html.
-    # Pick out the html file name from the url. And load that template.
-    try:
-
-        load_template = request.path.split('/')[-1]
-
-        if load_template == 'admin':
-            return HttpResponseRedirect(reverse('admin:index'))
-        context['segment'] = load_template
-
-        html_template = loader.get_template('home/' + load_template)
-        return HttpResponse(html_template.render(context, request))
-
-    except template.TemplateDoesNotExist:
-
-        html_template = loader.get_template('home/page-404.html')
-        return HttpResponse(html_template.render(context, request))
-
-    except:
-        html_template = loader.get_template('home/page-500.html')
-        return HttpResponse(html_template.render(context, request))
-
-
-
-
-
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def products(request):
@@ -75,7 +43,8 @@ def products(request):
 @login_required()
 def product_detail(request, id):
     product = get_object_or_404(models.Product, id=id)
-    context = {'product':product}
+    reqs = models.Order_request.objects.filter(product=product)
+    context = {'product':product, 'reqs':reqs}
     return render(request, 'home/product_detail.html', context)
 
 
@@ -95,7 +64,8 @@ def customers(request):
 @login_required()
 def customer_detail(request, id):
     customer = get_object_or_404(models.Customer, id=id)
-    context = {'customer':customer}
+    reqs = models.Order_request.objects.filter(customer=customer)
+    context = {'customer':customer, 'reqs':reqs}
     return render(request, 'home/customer_detail.html', context)
 
 
