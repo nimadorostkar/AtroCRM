@@ -51,6 +51,8 @@ class Product(models.Model):
 class Customer(models.Model):
     name = models.CharField(max_length=200, null=True,verbose_name = "نام")
     phone = models.CharField(max_length=200, null=True,verbose_name = "تلفن")
+    company = models.CharField(max_length=200, null=True,verbose_name = "نام شرکت")
+    address = models.CharField(max_length=400, null=True,verbose_name = "آدرس")
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     substantial = models.BooleanField(default=False, verbose_name = " قابل توجه " )
     product_tag = models.ManyToManyField(Product, blank=True, verbose_name = "تگ محصولی")
