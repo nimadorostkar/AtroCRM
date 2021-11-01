@@ -19,7 +19,6 @@ import datetime
 
 
 
-
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def index(request):
@@ -121,8 +120,6 @@ def order_req_detail(request, id):
     req_steps = models.Order_steps.objects.filter(request=req)
     context = {'req':req, 'req_steps':req_steps}
     return render(request, 'home/order_req_detail.html', context)
-
-
 
 
 
