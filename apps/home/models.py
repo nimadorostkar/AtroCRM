@@ -54,7 +54,7 @@ class Customer(models.Model):
     company = models.CharField(max_length=200, null=True,verbose_name = "نام شرکت")
     address = models.CharField(max_length=400, null=True,verbose_name = "آدرس")
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
-    substantial = models.BooleanField(default=False, verbose_name = " قابل توجه " )
+    substantial = models.BooleanField(default=False, verbose_name = "مشتری ویژه" )
     product_tag = models.ManyToManyField(Product, blank=True, verbose_name = "تگ محصولی")
     date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ")
 
@@ -95,7 +95,7 @@ class Order_request(models.Model):
 
 
     def __str__(self):
-        return ' سفارش ' + self.product.name + ' توسط ' + self.customer.name
+        return ' سفارش ' + self.product.name + ' برای ' + self.customer.name
 
     @property
     def short_description(self):

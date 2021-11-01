@@ -37,7 +37,11 @@
                         <div class="d-flex flex-column justify-content-center">
                           <a href="{{ Order_request.get_absolute_url }}">
                             <h6 class="mb-0 text-sm">
-                              <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
+                              {% if Order_request.customer.substantial %}
+                                <img src="/static/assets/img/golduser.png" class="avatar avatar-sm me-3">
+                              {% else %}
+                                <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
+                              {% endif %}
                               {{ Order_request.customer.name }}
                            </h6>
                          </a>
