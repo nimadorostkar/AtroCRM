@@ -14,10 +14,8 @@
           <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto" dir="rtl">
             <div class="card card-plain mt-8">
               <div class="card-header pb-0 text-left bg-transparent">
-                <h6 class="text-info text-gradient" align="right">
-                  نرم افزار مدیریت فروش و ارتباط با مشتریان AtroCRM
-                </h6>
-                <h4 align="right" class="text-info text-gradient"> ورود </h4>
+
+                <h3 align="right" class="text-info text-gradient"> ورود </h3>
                 <p class="mb-0" align="right">
                     {% if msg %}
                         {{ msg | safe }}
@@ -52,28 +50,16 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-              <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('/static/assets/img/curved-images/curved6.jpg')"></div>
+            <div class="oblique position-absolute top-0 h-100 d-md-block d-none ">
+              <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('/static/assets/img/crm.png')"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </section>    <br><br><br>
 
 {% endblock content %}
 
 <!-- Specific JS goes HERE -->
-{% block javascripts %}
-
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-
-{% endblock javascripts %}
+{% block javascripts %} {% endblock javascripts %}

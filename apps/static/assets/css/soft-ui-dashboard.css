@@ -1,13 +1,49 @@
-/*!
- * Bootstrap v5.0.0-beta3 (https://getbootstrap.com/)
- * Copyright 2011-2021 The Bootstrap Authors
- * Copyright 2011-2021 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+
+
+/* --------------- fonts --------------- */
+
+@font-face {
+  font-family: "iransans";
+  src: url("../fonts/IRANSansWeb.eot"),
+    url("../fonts/IRANSansWebd41d.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/IRANSansWeb.woff") format("woff"),
+    url("../fonts/IRANSansWeb.html") format("woff2"),
+    url("../fonts/IRANSansWeb.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.iransans { font-family: "iransans" !important; }
+
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {font-family: "iransans" !important;}
+
+.li, li {font-family: "iransans", sans-serif !important;}
+
+.p, p {font-family: "iransans", sans-serif !important;}
+
+.pre, pre {font-family: "iransans", sans-serif !important;}
+
+.a, a {font-family: "iransans", sans-serif !important;}
+
+.button, button {font-family: "iransans", sans-serif !important;}
+
+/* .span, span {font-family: "iransans", sans-serif !important;} */
+
+.text, text {font-family: "iransans", sans-serif !important;}
+
+.tspan, tspan {font-family: "iransans", sans-serif !important;}
+
+
+/* -------------- font end -----------  */
+
+
+
+
 :root {
   --bs-blue: #63B3ED;
   --bs-indigo: #596CFF;
-  --bs-purple: #6f42c1;
+  --bs-purple: #17c1e8;
   --bs-pink: #d63384;
   --bs-red: #F56565;
   --bs-orange: #fd7e14;
@@ -231,12 +267,12 @@ sup {
 }
 
 a {
-  color: #cb0c9f;
+  color: #18a6c7;
   text-decoration: none;
 }
 
 a:hover {
-  color: #830866;
+  color: #18a6c7;
   text-decoration: none;
 }
 
@@ -274,7 +310,7 @@ pre code {
 
 code {
   font-size: 0.875em;
-  color: #d63384;
+  color: #18a6c7;
   word-wrap: break-word;
 }
 
@@ -2550,8 +2586,8 @@ textarea.form-control-lg {
 }
 
 .form-check-input[type="checkbox"]:indeterminate {
-  background-color: #cb0c9f;
-  border-color: #cb0c9f;
+  background-color: #18a6c7;
+  border-color: #18a6c7;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
 }
 
@@ -3495,14 +3531,14 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-primary {
-  color: #cb0c9f;
-  border-color: #cb0c9f;
+  color: #18a6c7;
+  border-color: #18a6c7;
 }
 
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #cb0c9f;
-  border-color: #cb0c9f;
+  background-color: #18a6c7;
+  border-color: #18a6c7;
 }
 
 .btn-check:focus+.btn-outline-primary,
@@ -3516,8 +3552,8 @@ fieldset:disabled .btn {
 .btn-outline-primary.active,
 .btn-outline-primary.dropdown-toggle.show {
   color: #fff;
-  background-color: #cb0c9f;
-  border-color: #cb0c9f;
+  background-color: #18a6c7;
+  border-color: #18a6c7;
 }
 
 .btn-check:checked+.btn-outline-primary:focus,
@@ -3530,7 +3566,7 @@ fieldset:disabled .btn {
 
 .btn-outline-primary:disabled,
 .btn-outline-primary.disabled {
-  color: #cb0c9f;
+  color: #18a6c7;
   background-color: transparent;
 }
 
@@ -4552,7 +4588,7 @@ fieldset:disabled .btn {
 .navbar>.container-lg,
 .navbar>.container-xl,
 .navbar>.container-xxl {
-  display: flex;
+
   flex-wrap: inherit;
   align-items: center;
   justify-content: space-between;
@@ -7473,7 +7509,7 @@ fieldset:disabled .btn {
 }
 
 .border-primary {
-  border-color: #cb0c9f !important;
+  border-color: #17c1e8 !important;
 }
 
 .border-secondary {
@@ -13789,8 +13825,8 @@ fieldset:disabled .btn {
 }
 
 .input-group .form-control:focus {
-  border-left: 1px solid #e293d3 !important;
-  border-right: 1px solid #e293d3 !important;
+  border-left: 1px solid #18a6c7 !important;
+  border-right: 1px solid #18a6c7 !important;
 }
 
 .input-group .form-control:not(:first-child) {
@@ -13950,7 +13986,7 @@ label,
 }
 
 .bg-gradient-primary {
-  background-image: linear-gradient(310deg, #7928CA 0%, #FF0080 100%); 
+  background-image: linear-gradient(310deg, #7928CA 0%, #FF0080 100%);
 }
 
 .bg-gradient-secondary {
@@ -20979,7 +21015,7 @@ p {
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
-  background-image: linear-gradient(310deg, #cb0c9f 0%, #cb0c9f 100%);
+  background-image: linear-gradient(310deg, #17c1e8 0%, #17c1e8 100%);
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon svg .color-background,
