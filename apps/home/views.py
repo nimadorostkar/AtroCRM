@@ -118,7 +118,8 @@ def order_requests(request):
 @login_required()
 def order_req_detail(request, id):
     req = get_object_or_404(models.Order_request, id=id)
-    context = {'req':req}
+    req_steps = models.Order_steps.objects.filter(request=req)
+    context = {'req':req, 'req_steps':req_steps}
     return render(request, 'home/order_req_detail.html', context)
 
 

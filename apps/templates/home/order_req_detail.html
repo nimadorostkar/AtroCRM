@@ -65,30 +65,27 @@
           </div>
           <div class="card-body p-3">
             <div class="row">
-
-
+             {% for Order_steps in req_steps %}
               <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                 <div class="card card-blog card-plain">
                   <div class="card bg-transparent shadow-xl">
                     <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('/static/assets/img/curved-images/curved14.jpg');">
                       <span class="mask bg-gradient-dark"></span>
                       <div class="card-body position-relative z-index-1 p-3">
-                        <h5 class="text-white text-right"> <i class="fa fa-check text-info" aria-hidden="true"></i>  گام اول </h5>
+                        <h5 class="text-white text-right"> <i class="fa fa-check text-info" aria-hidden="true"></i> گام {{ Order_steps.step }} </h5>
                         <div class="card-body px-1 pb-0">
                           <p class="mb-4 text-sm text-white">
-                            As Uber works t hrough a huge amount of hrough a huge amount of hrough a huge amount of internal management turmoil.
+                            {{ Order_steps.description }}
                           </p>
                           <hr>
-                          <p class="text-left text-white"> <i class="far fa-calendar-alt me-2"></i> 1400-8-14 </p>
+                          <p class="text-left text-white"> <i class="far fa-calendar-alt me-2"></i> {{ Order_steps.date_created }}</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-
-
+              {% endfor %}
             </div>
           </div>
         </div>
