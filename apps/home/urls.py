@@ -24,5 +24,5 @@ urlpatterns = [
     path('order_req_detail/<int:id>/',views.order_req_detail,name='order_req_detail'),
 
     # Matches any html file
-    #re_path(r'^.*\.*', views.pages, name='pages'),
+    re_path(r'^.*\.*', views.pages, name='pages'),
 ]

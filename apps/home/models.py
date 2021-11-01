@@ -83,22 +83,22 @@ class Order_request(models.Model):
     customer = models.ForeignKey(Customer ,on_delete=models.CASCADE, verbose_name = "خریدار")
     product = models.ForeignKey(Product ,on_delete=models.CASCADE, verbose_name = "محصول")
     qty = models.IntegerField(default='1', verbose_name = "تعداد" )
-    description=models.TextField(max_length=1000, null=True, blank=True, verbose_name = "توضیحات")
+    description = models.TextField(max_length=1000, null=True, blank=True, verbose_name = "توضیحات")
     discount = models.IntegerField(default='0', verbose_name = "درصد تخفیف" )
-    CHOICES = ( ('تکمیل شده','تکمیل شده'), ('لغو شده','لغو شده'), ('دریافت پیش پرداخت','دریافت پیش پرداخت'), ('پرداخت شده','پرداخت شده'), ('در حال بررسی','در حال بررسی') )
-    status= models.CharField(max_length=30,choices=CHOICES, default='در حال بررسی', verbose_name = "وضعیت")
+    CHOICES = ( ('تکمیل شده','تکمیل شده'), ('لغو شده','لغو شده'), ('دریافت پیش پرداخت','دریافت پیش پرداخت'), ('در حال بررسی','در حال بررسی') )
+    status = models.CharField(max_length=30,choices=CHOICES, default='در حال بررسی', verbose_name = "وضعیت")
     date_created = jmodels.jDateField(auto_now_add=True, verbose_name = "تاریخ")
 
 
     def __str__(self):
-        return self.product.name
+        return ' سفارش ' + self.product.name + ' توسط ' + self.customer.name
 
     @property
     def short_description(self):
         return truncatechars(self.description, 70)
 
     def get_absolute_url(self):
-        return reverse('app:order_request_detail',args=[self.id])
+        return reverse('order_req_detail',args=[self.id])
 
     class Meta:
         verbose_name = "سفارش"
