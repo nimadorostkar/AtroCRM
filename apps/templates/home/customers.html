@@ -23,8 +23,9 @@
                   <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام مشتری </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> شماره تلفن </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام شرکت </th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> آدرس </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قابل توجه </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> اطلاعات تکمیلی </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تگ محصولی </th>
                   </tr>
                 </thead>
@@ -47,14 +48,17 @@
                       <p> {{ Customer.phone }} </p>
                     </td>
                     <td class="align-middle text-center text-sm">
-                      {% if Customer.substantial %}
-                        <span class="badge badge-sm bg-gradient-success"> substantial </span>
-                      {% else %}
-                        <span class="badge badge-sm bg-gradient-warning"> no substantial </span>
-                      {% endif %}
+                      <p> {{ Customer.company }} </p>
                     </td>
-                    <td class="align-middle text-center">
-                      <p class="text-xs text-secondary mb-0"> {{ Customer.additional_information|slice:":50" }}... </p>
+                    <td class="align-middle text-center text-sm">
+                      <p> {{ Customer.address }} </p>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      {% if Customer.substantial %}
+                        <span class="badge badge-sm bg-gradient-success"> ✓ </span>
+                      {% else %}
+                        <span class="badge badge-sm bg-gradient-warning"> ✘ </span>
+                      {% endif %}
                     </td>
                     <td>
                       <div class="avatar-group text-center mt-2">

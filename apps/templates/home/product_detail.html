@@ -20,8 +20,12 @@
                    <h4 class="font-weight-bolder"> {{ product.name }}  </h4>
                    <p class="mb-5"> {{ product.description }} </p>
                    <h5 class="font-weight-bolder"> قیمت: {{ product.price }}  ریال </h5>
+                   <br>
                    {% if product.available %}
-                     <span class="badge badge-sm bg-gradient-success" style="width:70px;">موجود</span>
+                   <p>
+                     <span class="badge badge-sm bg-gradient-success" style="width:70px;">موجود </span>
+                     <small> {{ product.inventory}} عدد </small>
+                  </p>
                    {% else %}
                      <span class="badge badge-sm bg-gradient-secondary" style="width:70px;">نا موجود</span>
                    {% endif %}

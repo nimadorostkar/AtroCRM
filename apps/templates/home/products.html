@@ -40,7 +40,8 @@
                     </td>
                     <td class="align-middle text-center text-sm">
                       {% if Product.available %}
-                        <span class="badge badge-sm bg-gradient-success">موجود</span>
+
+                        <p class="text-xs text-secondary mb-0"> <span class="badge badge-sm bg-gradient-success">موجود</span>  <small> {{ Product.inventory}} عدد </small> </p>
                       {% else %}
                         <span class="badge badge-sm bg-gradient-secondary">نا موجود</span>
                       {% endif %}

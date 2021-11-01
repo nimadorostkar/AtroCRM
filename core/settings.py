@@ -84,12 +84,11 @@ DATABASES = {
 
 
 
-
 # default settings
 JALALI_DATE_DEFAULTS = {
    'Strftime': {
         'date': '%y/%m/%d',
-        'datetime': '%H:%M:%S _ %y/%m/%d',
+        'datetime': '%H:%M _ %y/%m/%d',
     },
     'Static': {
         'js': [
