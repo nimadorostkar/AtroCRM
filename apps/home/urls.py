@@ -6,6 +6,7 @@ from apps.home import views
 urlpatterns = [
     # The home page
     path('', views.index, name='home'),
+    path('etc', views.etc, name='etc'),
     # Product
     path('products', views.products, name='products'),
     path('product_detail/<int:id>/',views.product_detail,name='product_detail'),

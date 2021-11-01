@@ -32,6 +32,19 @@ def index(request):
 
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
+def etc(request):
+    context = {'segment': 'etc'}
+
+    html_template = loader.get_template('home/etc.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
 def products(request):
     products = models.Product.objects.all().order_by('-date_created')
     context = {'products': products }
