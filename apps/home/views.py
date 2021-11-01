@@ -33,7 +33,7 @@ def index(request):
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def products(request):
-    products = models.Product.objects.all()
+    products = models.Product.objects.all().order_by('-date_created')
     context = {'products': products }
     #context = {'segment': 'products'}
     html_template = loader.get_template('home/products.html')
@@ -43,7 +43,7 @@ def products(request):
 @login_required()
 def product_detail(request, id):
     product = get_object_or_404(models.Product, id=id)
-    reqs = models.Order_request.objects.filter(product=product)
+    reqs = models.Order_request.objects.filter(product=product).order_by('-date_created')
     context = {'product':product, 'reqs':reqs}
     return render(request, 'home/product_detail.html', context)
 
@@ -54,7 +54,7 @@ def product_detail(request, id):
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def customers(request):
-    customers = models.Customer.objects.all()
+    customers = models.Customer.objects.all().order_by('-date_created')
     context = {'customers': customers }
     #context = {'segment': 'products'}
     html_template = loader.get_template('home/customers.html')
@@ -64,7 +64,7 @@ def customers(request):
 @login_required()
 def customer_detail(request, id):
     customer = get_object_or_404(models.Customer, id=id)
-    reqs = models.Order_request.objects.filter(customer=customer)
+    reqs = models.Order_request.objects.filter(customer=customer).order_by('-date_created')
     context = {'customer':customer, 'reqs':reqs}
     return render(request, 'home/customer_detail.html', context)
 
@@ -77,7 +77,7 @@ def customer_detail(request, id):
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def order_requests(request):
-    reqs = models.Order_request.objects.all()
+    reqs = models.Order_request.objects.all().order_by('-date_created')
     context = {'reqs': reqs }
     #context = {'segment': 'products'}
     html_template = loader.get_template('home/order_requests.html')
