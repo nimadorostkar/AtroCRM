@@ -18,17 +18,19 @@
               <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
                 <h5 class="text-white font-weight-bolder mb-4 pt-2 text-center"> {{ req }}  </h5>
                 <br><br>
-                <p class="text-white"> تاریخ: {{ req.date_created }} </p>
+                <p class="text-white"> تاریخ: {{ req.date_created|date:'H:i  Y-m-d'  }} </p>
                 <p class="text-white"> وضعیت:
-                  {% if req.status == 'تکمیل شده' %}
-                    <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
-                  {% elif req.status == 'لغو شده' %}
-                    <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
-                  {% elif req.status == 'دریافت پیش پرداخت' %}
-                    <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
-                  {% else %}
-                    <span class="badge badge-sm bg-gradient-warning"> در حال بررسی </span>
-                  {% endif %}
+                    {% if req.status == 'تکمیل شده' %}
+                      <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
+                    {% elif req.status == 'لغو شده' %}
+                      <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
+                    {% elif req.status == 'دریافت پیش پرداخت' %}
+                      <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
+                    {% elif req.status == 'جدید' %}
+                      <span class="badge badge-sm bg-gradient-warning"> جدید </span>
+                    {% else %}
+                      <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
+                    {% endif %}
                 </p>
                 <p class="text-white"> تعداد: {{ req.qty }} </p>
                 <p class="text-white"> قیمت واحد: {{ req.product.price }} ریال </p>

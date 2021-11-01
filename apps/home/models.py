@@ -89,8 +89,8 @@ class Order_request(models.Model):
     qty = models.IntegerField(default='1', verbose_name = "تعداد" )
     description = models.TextField(max_length=1000, null=True, blank=True, verbose_name = "توضیحات")
     discount = models.IntegerField(default='0', verbose_name = "درصد تخفیف" )
-    CHOICES = ( ('تکمیل شده','تکمیل شده'), ('لغو شده','لغو شده'), ('دریافت پیش پرداخت','دریافت پیش پرداخت'), ('در حال بررسی','در حال بررسی') )
-    status = models.CharField(max_length=30,choices=CHOICES, default='در حال بررسی', verbose_name = "وضعیت")
+    CHOICES = ( ('تکمیل شده','تکمیل شده'), ('لغو شده','لغو شده'), ('دریافت پیش پرداخت','دریافت پیش پرداخت'), ('در حال بررسی','در حال بررسی'), ('جدید','جدید'))
+    status = models.CharField(max_length=30,choices=CHOICES, default='جدید', verbose_name = "وضعیت")
     date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ")
 
 

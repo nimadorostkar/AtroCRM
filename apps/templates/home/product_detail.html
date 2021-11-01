@@ -100,8 +100,10 @@
                          <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
                        {% elif Order_request.status == 'دریافت پیش پرداخت' %}
                          <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
+                       {% elif Order_request.status == 'جدید' %}
+                         <span class="badge badge-sm bg-gradient-warning"> جدید </span>
                        {% else %}
-                         <span class="badge badge-sm bg-gradient-warning"> در حال بررسی </span>
+                         <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
                        {% endif %}
                      </td>
 
@@ -114,7 +116,7 @@
                      </td>
 
                      <td class="align-middle text-center">
-                       <p class="text-xs text-secondary mb-0"> {{ Order_request.date_created }} </p>
+                       <p class="text-xs text-secondary mb-0"> {{ Order_request.date_created|date:'H:i  Y-m-d' }} </p>
                      </td>
 
                    </tr>

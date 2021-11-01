@@ -25,7 +25,6 @@
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> شماره تلفن </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام شرکت </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> آدرس </th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قابل توجه </th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تگ محصولی </th>
                   </tr>
                 </thead>
@@ -37,7 +36,11 @@
                         <div class="d-flex flex-column justify-content-center">
                           <a href="{{ Customer.get_absolute_url }}">
                             <h6 class="mb-0 text-sm">
-                              <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
+                              {% if Customer.substantial %}
+                                <img src="/static/assets/img/golduser.png" class="avatar avatar-sm me-3">
+                              {% else %}
+                                <img src="/static/assets/img/user.png" class="avatar avatar-sm me-3">
+                              {% endif %}
                               {{ Customer.name }}
                            </h6>
                          </a>
@@ -52,13 +55,6 @@
                     </td>
                     <td class="align-middle text-center text-sm">
                       <p> {{ Customer.address }} </p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      {% if Customer.substantial %}
-                        <span class="badge badge-sm bg-gradient-success"> ✓ </span>
-                      {% else %}
-                        <span class="badge badge-sm bg-gradient-warning"> ✘ </span>
-                      {% endif %}
                     </td>
                     <td>
                       <div class="avatar-group text-center mt-2">

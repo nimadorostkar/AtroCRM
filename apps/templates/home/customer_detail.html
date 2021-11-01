@@ -8,53 +8,71 @@
 {% block content %}
 
     <div class="container-fluid">
-      <div class="page-header min-height-150 border-radius-xl mt-4" style="background-image: url('/static/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
-        <span class="mask bg-gradient-primary opacity-6"></span>
-      </div>
+      <div class="page-header min-height-150 border-radius-xl mt-4" style="background-image: url('/static/assets/img/bg.png'); background-position-y: 100%;"></div>
+
       <div class="card card-body blur shadow-blur mx-4 mt-n6">
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-              <img src="/static/assets/img/user.png" alt="..." class="w-100 border-radius-lg shadow-sm">
+              {% if customer.substantial %}
+                <img src="/static/assets/img/golduser.png" alt="..." class="w-100 border-radius-lg shadow-sm">
+              {% else %}
+                <img src="/static/assets/img/user.png" alt="..." class="w-100 border-radius-lg shadow-sm">
+              {% endif %}
             </div>
           </div>
           <div class="col-auto my-auto">
             <div class="h-100">
-              <h5 class="mb-1">
-                 {{ customer.name }}
-
-                 <small>
-                 {% if Customer.substantial %}
-                   <span class="badge badge-sm bg-gradient-success"> substantial </span>
-                 {% else %}
-                   <span class="badge badge-sm bg-gradient-warning"> no substantial </span>
-                 {% endif %}
-                 </small>
-
-              </h5>
+              <h5 class="mb-1"> {{ customer.name }}  </h5>
               <p class="mb-0 font-weight-bold text-sm">
-                {{ customer.phone }}
+                {{ customer.company }}
               </p>
             </div>
           </div>
-          <div class="col-sm-7 col-8 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3" dir="rtl">
-            <div class="nav-wrapper position-relative end-0">
-                    <span class="ms-1"> {{ customer.additional_information }} </span>
-            </div>
+          <div class="col-sm-6 col-8 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">  </div>
+        </div>
+        <div class="nav-wrapper position-relative end-0" dir="rtl">
+          <div class="table-responsive p-0">
+          <table class="table align-items-center mb-0">
+            <thead>
+              <tr>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> شماره تماس </th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> آدرس </th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> توضیحات </th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تگ محصولی </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="align-middle text-center">
+                  <p> {{ customer.phone }} </p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                  <p> {{ customer.address }} </p>
+                </td>
+                <td class="align-middle text-center">
+                  <p> {{ customer.additional_information }} </p>
+                </td>
+                <td class="align-middle text-center">
+                  <div class="avatar-group text-center mt-2">
+                    {% for product_tag in customer.product_tag.all %}
+                    <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ product_tag.name }}">
+                        <img style="background-color: lightgrey;" alt="{{ product_tag.name }}" src="{{ product_tag.image.url }}">
+                    </a>
+                    {% endfor %}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
           </div>
         </div>
       </div>
 
 
-
-
-
-
       <br><br>
 
-
       <div class="row" dir="rtl">
-
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
@@ -87,15 +105,12 @@
                           </div>
                         </div>
                       </td>
-
                       <td class="align-middle text-center text-sm">
                         <p class="text-xs text-secondary mb-0"> <img src="{{ Order_request.product.image.url }}" class="avatar avatar-sm me-3"> {{ Order_request.product.name }} </p>
                       </td>
-
                       <td class="align-middle text-center">
                         <p class="text-xs text-secondary mb-0"> {{ Order_request.qty }} عدد </p>
                       </td>
-
                       <td class="align-middle text-center">
                         {% if Order_request.status == 'تکمیل شده' %}
                           <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
@@ -103,20 +118,18 @@
                           <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
                         {% elif Order_request.status == 'دریافت پیش پرداخت' %}
                           <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
+                        {% elif Order_request.status == 'جدید' %}
+                          <span class="badge badge-sm bg-gradient-warning"> جدید </span>
                         {% else %}
-                          <span class="badge badge-sm bg-gradient-warning"> در حال بررسی </span>
+                          <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
                         {% endif %}
                       </td>
-
                       <td class="align-middle text-center">
                         <p class="text-xs text-secondary mb-0"> {{ Order_request.user }} </p>
                       </td>
-
-
                       <td class="align-middle text-center">
-                        <p class="text-xs text-secondary mb-0"> {{ Order_request.date_created }} </p>
+                        <p class="text-xs text-secondary mb-0"> {{ Order_request.date_created|date:'H:i  Y-m-d'  }} </p>
                       </td>
-
                     </tr>
                    {% endfor %}
                   </tbody>
@@ -126,39 +139,8 @@
           </div>
         </div>
 
-        <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-header pb-0 p-3">
-              <h6 class="mb-1">   محصولات مورد توجه این مشتری </h6>
-            </div>
-            <div class="card-body p-3">
-              <div class="row">
-                {% for product_tag in customer.product_tag.all %}
-                  <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
-                    <div class="card card-blog card-plain">
-                      <div class="position-relative">
-                        <a href="{{ product_tag.get_absolute_url }}" class="d-block shadow-xl border-radius-xl">
-                          <img src="{{ product_tag.image.url }}" alt="{{ product_tag.name }}" class="img-fluid shadow border-radius-xl">
-                        </a>
-                      </div>
-                      <div class="card-body px-1 pb-0 text-center">
-                        <a href="{{ product_tag.get_absolute_url }}"> <p> <small> {{ product_tag.name }} </small> </p> </a>
-                      </div>
-                    </div>
-                  </div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-        </div>
-
-
 
       </div>
-
-
-
-
 
 
 
