@@ -1,0 +1,126 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} ثبت سفارش {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+    <!-- select search  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/static/assets/css/bootstrap336.min.css" rel="stylesheet" />
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+  <div class="container-fluid py-4">
+
+    <div class="row" dir="rtl">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header pb-0">
+            <h6>  ثبت سفارش  </h6>
+          </div>
+
+          <div class="card-body px-0 pt-0 pb-2">
+
+
+               <h1> reg...</h1> <br><br><br>
+
+
+               <form action="#" method="post" dir="rtl" align="right">
+                 {% csrf_token %}
+
+
+                 <div class="row">
+                   <div class="col-md-4 pr-md-4">
+                     <div class="form-group">
+                       <label><p>خریدار </p></label>
+                       <select name="buyer" class="form-control selectpicker" data-live-search="true">
+                         {% for Customer in customers %}
+                           <option data-tokens="{{Customer.name}}" value={{Customer.id}}>{{Customer.name}}</option>
+                         {% endfor %}
+                       </select>
+                     </div>
+                   </div>
+                   <div class="col-md-2 pl-md-4">
+                     <div class="form-group">
+                       <label><p> درصد تخفیف </p></label>
+                       <input name="discount" type="number" class="form-control">
+                     </div>
+                   </div>
+                 </div>
+
+
+                 <div class="row">
+                   <div class="col-md-10 pr-md-4">
+                     <div class="form-group">
+                       <label><p> توضیحات </p></label>
+                       <input name="description" type="text" class="form-control">
+                     </div>
+                   </div>
+                 </div>
+
+
+
+                 <div class="row">
+                   <div class="col-md-4 pr-md-4">
+                     <div class="form-group">
+                     <label><p> محصول </p></label>
+                     <select name="product-0" id="0" class="form-control selectpicker" data-live-search="true">
+                       {% for Product in products %}
+                         <option data-tokens="{{Product.name}}" value={{Product.id}}>{{Product.name}}</option>
+                       {% endfor %}
+                     </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4 pr-md-4">
+                    <div class="form-group">
+                      <label><p> تعداد </p></label>
+                      <input name="qty-0" type="number" class="form-control">
+                    </div>
+                  </div>
+                </div>
+
+
+                 <div class="card-footer" align="center">
+                   <button type="submit" class="btn btn-fill btn-primary"> ذخیره </button>
+                 </div>
+
+              </form>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    {% include "includes/footer.html" %}
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+
+<script>
+
+
+    $(function() {
+      $('.selectpicker').selectpicker({
+        liveSearch: true
+      });
+    });
+
+</script>
+{% endblock javascripts %}

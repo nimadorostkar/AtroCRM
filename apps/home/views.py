@@ -110,6 +110,27 @@ def order_req_detail(request, id):
 
 
 
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def order_registration(request):
+    customers = models.Customer.objects.all().order_by('-date_created')
+    products = models.Product.objects.all().order_by('-date_created')
+    context = {'customers': customers , 'products':products}
+    #context = {'segment': 'products'}
+    html_template = loader.get_template('home/order_registration.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
