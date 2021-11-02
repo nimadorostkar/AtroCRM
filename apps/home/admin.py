@@ -47,9 +47,10 @@ admin.site.register(models.Customer, CustomerAdmin)
 
 
 #------------------------------------------------------------------------------
-class Order_incomingsInline(admin.TabularInline):
+class Order_incomingsInline(StackedInlineJalaliMixin, TabularInlineJalaliMixin, admin.TabularInline):
     model = Order_incomings
     extra = 1
+
 
 class Order_requestAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('product','user','customer','short_description','status')
@@ -57,6 +58,8 @@ class Order_requestAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ['product__name']
     raw_id_fields = ('product', 'user', 'customer')
     inlines = [ Order_incomingsInline, ]
+
+
 
 admin.site.register(models.Order_request, Order_requestAdmin)
 

@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from . import models
 from django.contrib.auth.models import User
-from .models import Product, Order_request, Customer
+from .models import Product, Order_request, Customer, Order_incomings
 from itertools import chain
 from django.contrib.auth import get_user_model
 from django.db import transaction
@@ -100,8 +100,8 @@ def order_requests(request):
 @login_required()
 def order_req_detail(request, id):
     req = get_object_or_404(models.Order_request, id=id)
-    req_steps = models.Order_steps.objects.filter(request=req)
-    context = {'req':req, 'req_steps':req_steps}
+    incomings = models.Order_incomings.objects.filter(request=req)
+    context = {'req':req, 'incomings':incomings}
     return render(request, 'home/order_req_detail.html', context)
 
 

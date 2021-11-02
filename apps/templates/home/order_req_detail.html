@@ -21,7 +21,7 @@
               <div class="d-flex flex-column h-100">
                 <p class="text-lg mb-1 pt-2 text-bold"> <i class="far fa-calendar-alt me-2"></i> <small> {{ req.date_created|date:'H:i  Y-m-d' }} </small> </p>
                 <h3 dir="rtl" class="font-weight-bolder"> {{ req }} </h3>
-                <p dir="rtl" class="mb-5"> {{ req.description }} </p>
+                <p dir="rtl" class="mb-5"> {{ req.description|linebreaks }} </p>
               </div>
             </div>
             <div class="col-lg-3 ms-auto text-center mt-5 mt-lg-0">
@@ -125,25 +125,25 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0 p-3">
-            <h6 class="mb-1"> گام های سفارش </h6>
-            <p class="text-sm"> مراحل و جزئیات مربوط به سفارش {{ req.product }}</p>
+            <h6 class="mb-1"> دریافتی ها </h6>
+            <p class="text-sm"> مبالغ دریافتی مربوط به سفارش {{ req.product }}</p>
           </div>
           <div class="card-body p-3">
             <div class="row">
-             {% for Order_steps in req_steps %}
+             {% for Order_incomings in incomings %}
               <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                 <div class="card card-blog card-plain">
                   <div class="card bg-transparent shadow-xl">
                     <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('/static/assets/img/curved-images/curved14.jpg');">
                       <span class="mask bg-gradient-dark"></span>
                       <div class="card-body position-relative z-index-1 p-3">
-                        <h5 class="text-white text-right"> <i class="fa fa-check text-info" aria-hidden="true"></i> گام {{ Order_steps.step }} </h5>
+                        <h5 class="text-white text-right"> <i class="fa fa-check text-info" aria-hidden="true"></i> گام {{ Order_incomings.step }} </h5>
                         <div class="card-body px-1 pb-0">
                           <p class="mb-4 text-sm text-white">
-                            {{ Order_steps.description }}
+                            {{ Order_incomings.description }} 
                           </p>
                           <hr>
-                          <p class="text-left text-white"> <i class="far fa-calendar-alt me-2"></i> {{ Order_steps.date_created|date:'H:i  Y-m-d'  }}</p>
+                          <p class="text-left text-white"> <i class="far fa-calendar-alt me-2"></i> {{ Order_incomings.date_created|date:'H:i  Y-m-d'  }}</p>
                         </div>
                       </div>
                     </div>
