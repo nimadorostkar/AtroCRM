@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from . import models
 from django.contrib.auth.models import User
 from .models import Product, Order_request, Customer, Order_incomings
+from .forms import TimeForm
 from itertools import chain
 from django.contrib.auth import get_user_model
 from django.db import transaction
@@ -101,7 +102,18 @@ def order_requests(request):
 def order_req_detail(request, id):
     req = get_object_or_404(models.Order_request, id=id)
     incomings = models.Order_incomings.objects.filter(request=req)
-    context = {'req':req, 'incomings':incomings}
+    timeform = TimeForm(request.POST)
+
+    if request.method=="POST":
+        if timeform.is_valid():
+            incoming = Order_incomings()
+            incoming.request = req
+            incoming.amount = request.POST['amount']
+            incoming.save()
+            context = {'req':req, 'incomings':incomings, 'timeform':timeform}
+            return render(request, 'home/order_req_detail.html', context)
+
+    context = {'req':req, 'incomings':incomings, 'timeform':timeform}
     return render(request, 'home/order_req_detail.html', context)
 
 
