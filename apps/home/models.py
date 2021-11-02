@@ -113,7 +113,7 @@ class Order_request(models.Model):
 class Order_incomings(models.Model):
     request = models.ForeignKey(Order_request ,on_delete=models.CASCADE, verbose_name = "برای سفارش")
     amount = models.IntegerField( verbose_name = "قیمت ( ریال )")
-    date_created = jmodels.jDateField(verbose_name = "تاریخ")
+    date_created = jmodels.jDateField(auto_now_add=True, verbose_name = "تاریخ")
 
 
     def __str__(self):

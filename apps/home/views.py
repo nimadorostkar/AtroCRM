@@ -86,7 +86,7 @@ def customer_detail(request, id):
 
 
 
-
+ 
 
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
