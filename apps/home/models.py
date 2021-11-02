@@ -15,7 +15,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True, verbose_name = "موجود" )
     name = models.CharField(max_length=200, unique=True, verbose_name = "نام")
     inventory = models.IntegerField(default='1', verbose_name = "موجودی")
-    price = models.CharField(max_length=200, verbose_name = "قیمت ( ریال )")
+    price = models.IntegerField( verbose_name = "قیمت ( ریال )")
     description = models.TextField(max_length=900,null=True, blank=True,verbose_name = "توضیحات")
     image = models.ImageField(upload_to='media', default='media/Default.png', verbose_name = "تصویر")
     date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ")
@@ -110,27 +110,18 @@ class Order_request(models.Model):
 
 
 
-class Order_steps(models.Model):
+class Order_incomings(models.Model):
     request = models.ForeignKey(Order_request ,on_delete=models.CASCADE, verbose_name = "برای سفارش")
-    CHOICES = ( ('اول','اول'), ('دوم','دوم'), ('سوم','سوم'), ('چهارم','چهارم'), ('پنجم','پنجم'), ('ششم','ششم'), ('هفتم','هفتم'), ('هشتم','هشتم'), ('نهم','نهم'), ('دهم','دهم') )
-    step=models.CharField(max_length=20,choices=CHOICES, verbose_name = "گام")
-    description = models.TextField(max_length=1000, null=True, blank=True, verbose_name = "توضیحات")
-    date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ")
+    amount = models.IntegerField( verbose_name = "قیمت ( ریال )")
+    date_created = jmodels.jDateTimeField(verbose_name = "تاریخ")
 
 
     def __str__(self):
-      return "گام : " + str(self.step) + " برای سفارش: " + str(self.request)
-
-    def get_absolute_url(self):
-        return reverse('app:order_steps_detail',args=[self.id])
-
-    @property
-    def short_description(self):
-        return truncatechars(self.description, 60)
+      return " مبلغ " + str(self.amount) + " برای سفارش " + str(self.request) + " در تاریخ " + str(self.date_created)
 
     class Meta:
-        verbose_name = "مرحله سفارش"
-        verbose_name_plural = "مراحل سفارش"
+        verbose_name = "مبلغ ورودی سفارش"
+        verbose_name_plural = "مبالغ ورودی سفارش"
 
 
 
