@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from . import models
 from django.contrib.auth.models import User
-from .models import Product
+from .models import Product, Order_request, Customer
 from itertools import chain
 from django.contrib.auth import get_user_model
 from django.db import transaction
@@ -115,6 +115,19 @@ def order_req_detail(request, id):
 def order_registration(request):
     customers = models.Customer.objects.all().order_by('-date_created')
     products = models.Product.objects.all().order_by('-date_created')
+    if request.method=="POST":
+        req = Order_request()
+        req.user = request.user
+        req.customer = get_object_or_404(models.Customer, id=request.POST.get('customer'))
+        req.product = get_object_or_404(models.Product, id=request.POST.get('product'))
+        req.qty = request.POST['qty']
+        req.discount = request.POST['discount']
+        req.description = request.POST['description']
+        req.save()
+        success = 'سفارش جدید ثبت شد'
+        context = {'customers': customers , 'products':products, 'success':success}
+        return render(request, 'home/order_registration.html', context)
+
     context = {'customers': customers , 'products':products}
     #context = {'segment': 'products'}
     html_template = loader.get_template('home/order_registration.html')
