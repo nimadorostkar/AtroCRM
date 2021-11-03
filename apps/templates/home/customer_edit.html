@@ -72,24 +72,23 @@
                   </div>
 
 
-                    <div class="row">
-                      <div class="col-md-2 pr-md-4">
-                          <div class="form-group">
-                            <label><p class="text-xs text-secondary mb-0"> مشتری ویژه </p></label> <br>
-                            <input name="substantial"  type="checkbox" {% if customer.substantial %} checked {% endif%} >
-                          </div>
+                  <div class="row">
+                    <div class="col-md-2 pr-md-4">
+                        <div class="form-group">
+                          <label><p class="text-xs text-secondary mb-0"> مشتری ویژه </p></label> <br>
+                          <input name="substantial"  type="checkbox" {% if customer.substantial %} checked {% endif%} >
                         </div>
-                     <div class="col-md-10 pr-md-4">
-                       <div class="form-group">
-                         <label><p class="text-xs text-secondary mb-0"> تگ محصولی </p></label>
-                           {% for Product in products %}
-                             <label  for="ts1">{{Product}}</label>
-                             <input type="checkbox" name="products" value="{{ Product.pk }}" {% if Product in customer.product_tag.all %} checked {% endif%}  />
-                           {% endfor %}
-                       </div>
+                      </div>
+                   <div class="col-md-10 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> تگ محصولی </p></label>
+                         {% for Product in products %}
+                           <label  for="ts1">{{Product}}</label>
+                           <input type="checkbox" name="products" value="{{ Product.pk }}" {% if Product in customer.product_tag.all %} checked {% endif%}  />
+                         {% endfor %}
                      </div>
-                    </div>
-
+                   </div>
+                  </div>
 
 
                  <div class="card-footer" align="center">

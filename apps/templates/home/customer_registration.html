@@ -81,7 +81,7 @@
                      </div>
                      <div class="col-md-10 pr-md-4">
                        <div class="form-group">
-                         <label><p class="text-xs text-secondary mb-0"> تگ محصولی </p></label><br>
+                         <label><p class="text-xs text-secondary mb-0"> تگ محصولی </p></label> <br>
                           {% for product in products.all %}
                             <label  for="ts1">{{product}}</label>
                             <input type="checkbox" name="products" value="{{ product.pk }}" />
