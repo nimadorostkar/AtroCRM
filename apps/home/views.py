@@ -86,7 +86,7 @@ def customer_detail(request, id):
 
 
 
- 
+
 
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
@@ -102,18 +102,22 @@ def order_requests(request):
 def order_req_detail(request, id):
     req = get_object_or_404(models.Order_request, id=id)
     incomings = models.Order_incomings.objects.filter(request=req)
-    timeform = TimeForm(request.POST)
+    total_price = (req.product.price * req.qty) - ((req.product.price * req.qty)*(req.discount/100))
+    total_incoming = sum(incomings.values_list('amount', flat=True))
+    remained = total_price - total_incoming
 
+    timeform = TimeForm(request.POST)
     if request.method=="POST":
         if timeform.is_valid():
             incoming = Order_incomings()
             incoming.request = req
             incoming.amount = request.POST['amount']
+            incoming.date_created = timeform.cleaned_data['date_created']
             incoming.save()
-            context = {'req':req, 'incomings':incomings, 'timeform':timeform}
+            context = {'req':req, 'incomings':incomings, 'timeform':timeform, 'total_price':total_price, 'total_incoming':total_incoming, 'remained':remained}
             return render(request, 'home/order_req_detail.html', context)
 
-    context = {'req':req, 'incomings':incomings, 'timeform':timeform}
+    context = {'req':req, 'incomings':incomings, 'timeform':timeform, 'total_price':total_price, 'total_incoming':total_incoming, 'remained':remained}
     return render(request, 'home/order_req_detail.html', context)
 
 
@@ -144,6 +148,38 @@ def order_registration(request):
     #context = {'segment': 'products'}
     html_template = loader.get_template('home/order_registration.html')
     return HttpResponse(html_template.render(context, request))
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def order_edit(request):
+    customers = models.Customer.objects.all().order_by('-date_created')
+    products = models.Product.objects.all().order_by('-date_created')
+    if request.method=="POST":
+        req = Order_request()
+        req.user = request.user
+        req.customer = get_object_or_404(models.Customer, id=request.POST.get('customer'))
+        req.product = get_object_or_404(models.Product, id=request.POST.get('product'))
+        req.qty = request.POST['qty']
+        req.discount = request.POST['discount']
+        req.description = request.POST['description']
+        req.save()
+        success = 'ویرایش سفارش ثبت شد'
+        context = {'customers': customers , 'products':products, 'success':success}
+        return render(request, 'home/order_edit.html', context)
+
+    context = {'customers': customers , 'products':products}
+    #context = {'segment': 'products'}
+    html_template = loader.get_template('home/order_edit.html')
+    return HttpResponse(html_template.render(context, request))
+
+
 
 
 

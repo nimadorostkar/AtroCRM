@@ -23,8 +23,13 @@
             <div class="col-lg-9">
               <div class="d-flex flex-column h-100">
                 <p class="text-lg mb-1 pt-2 text-bold"> <i class="far fa-calendar-alt me-2"></i> <small> {{ req.date_created|date:'H:i  Y-m-d' }} </small> </p>
-                <h3 dir="rtl" class="font-weight-bolder"> {{ req }} </h3>
-                <p dir="rtl" class="mb-5"> {{ req.description|linebreaks }} </p>
+                <h3 dir="rtl" class="font-weight-bolder">
+                  {{ req }}
+                  <a class="btn btn-link text-dark px-3 mb-0 text-secondary text-xxs" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>
+                </h3>
+                <div class="ms-auto">
+                  <p dir="rtl"> {{ req.description|linebreaks }} </p>
+                </div>
               </div>
             </div>
             <div class="col-lg-3 ms-auto text-center mt-5 mt-lg-0">
@@ -42,18 +47,19 @@
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> نام مشتری </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> شماره مشتری </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> مشتری  </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تعداد </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت واحد </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> درصد تخفیف </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> کارشناس فروش </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> وضعیت </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت کل </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> مبلغ دریافتی </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> مانده </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td class="align-middle text-center">
+                        <a href="{{ req.customer.get_absolute_url }}">
                           <h6 class="mb-0 text-sm">
                               {% if req.customer.substantial %}
                                 <img src="/static/assets/img/golduser.png" class="avatar avatar-sm me-3">
@@ -62,10 +68,11 @@
                               {% endif %}
                               {{ req.customer.name }}
                           </h6>
+                        </a>
+                          <p class="text-xs text-secondary mb-0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ req.customer.phone }}</p>
+
                       </td>
-                      <td class="align-middle text-center">
-                        <p class="text-xs text-secondary mb-0"> {{ req.customer.phone }} </p>
-                      </td>
+
                       <td class="align-middle text-center">
                         <p class="text-xs text-secondary mb-0"> {{ req.qty }} عدد </p>
                       </td>
@@ -76,36 +83,54 @@
                         <p class="text-xs text-secondary mb-0"> {{ req.discount }} ٪ </p>
                       </td>
                       <td class="align-middle text-center">
-                        <p class="text-xs text-secondary mb-0"> {{ req.user }} </p>
+                        <p class="text-xs text-secondary mb-0"> {{ total_price }} ریال </p>
                       </td>
                       <td class="align-middle text-center">
-                        {% if req.status == 'تکمیل شده' %}
-                          <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
-                        {% elif req.status == 'لغو شده' %}
-                          <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
-                        {% elif req.status == 'دریافت پیش پرداخت' %}
-                          <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
-                        {% elif req.status == 'جدید' %}
-                          <span class="badge badge-sm bg-gradient-warning"> جدید </span>
-                        {% else %}
-                          <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
-                        {% endif %}
+                        <p class="text-xs text-secondary mb-0"> {{ total_incoming }} ریال </p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-xs text-secondary mb-0"> {{ remained }} ریال </p>
                       </td>
                     </tr>
                   </tbody>
                 </table>
 
                 <br>
-                <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
-                  <a class="text-info text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
-                    پیش فاکتور
-                    <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                  </a>
-                  <a class="text-info text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
-                    فاکتور
-                    <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                  </a>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
+                      <a class="text-info text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
+                        پیش فاکتور
+                        <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
+                      </a>
+                      <a class="text-info text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
+                        فاکتور
+                        <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6" dir="ltr">
+                    <p> <span class="text-xs text-secondary mb-0"> کارشناس فروش : </span> {{ req.user }} </p>
+                    <p class="text-xs text-secondary mb-0"> وضعیت:
+                      {% if req.status == 'تکمیل شده' %}
+                        <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
+                      {% elif req.status == 'لغو شده' %}
+                        <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
+                      {% elif req.status == 'دریافت پیش پرداخت' %}
+                        <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
+                      {% elif req.status == 'جدید' %}
+                        <span class="badge badge-sm bg-gradient-warning"> جدید </span>
+                      {% else %}
+                        <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
+                      {% endif %}
+                    </p>
+                  </div>
                 </div>
+
+
+
+
 
               </div>
 

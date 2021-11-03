@@ -18,4 +18,5 @@ urlpatterns = [
     path('order_req_detail/<int:id>/',views.order_req_detail,name='order_req_detail'),
     # Order registration
     path('order_registration', views.order_registration, name='order_registration'),
+    path('order_edit', views.order_edit, name='order_edit'),
 ]
