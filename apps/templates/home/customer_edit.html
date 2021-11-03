@@ -87,6 +87,13 @@
                      </div>
                     </div>
 
+                    <hr>
+
+                    {% for Product in products %}
+                      <label  for="ts1">{{Product}}</label>
+                      <input type="checkbox" name="products" value="{{ Product.pk }}" />
+                    {% endfor %}
+
 
                  <div class="card-footer" align="center">
                    <button type="submit" class="btn bg-gradient-info my-1 me-1"> ثبت </button>
