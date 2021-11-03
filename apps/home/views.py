@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from . import models
 from django.contrib.auth.models import User
 from .models import Product, Order_request, Customer, Order_incomings
-from .forms import TimeForm
+from .forms import TimeForm, CustomerForm
 from itertools import chain
 from django.contrib.auth import get_user_model
 from django.db import transaction
@@ -86,6 +86,41 @@ def customer_detail(request, id):
 
 
 
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def customer_registration(request):
+    products = models.Product.objects.all().order_by('-date_created')
+    tagform = CustomerForm(request.POST)
+    if request.method=="POST":
+        if tagform.is_valid():
+
+            if request.POST.get('substantial'):
+                substantial = True
+            else:
+                substantial = False
+
+            new = Customer()
+            new.name = request.POST['name']
+            new.phone = request.POST['phone']
+            new.company = request.POST['company']
+            new.address = request.POST['address']
+            new.additional_information = request.POST['additional_information']
+            new.substantial = substantial
+            new.save()
+            new.product_tag.set(tagform.cleaned_data.get("product_tag"))
+            success = 'مشتری جدید ایجاد شد ، مشاهده پروفایل'
+            link = get_object_or_404(models.Customer, id=new.id)
+
+            context = {'products':products, 'tagform':tagform, 'success':success, 'link':link}
+            return render(request, 'home/customer_registration.html', context)
+
+    context = {'products':products, 'tagform':tagform}
+    html_template = loader.get_template('home/customer_registration.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+
+
 
 
 #------------------------------------------------------------------------------
@@ -140,8 +175,9 @@ def order_registration(request):
         req.discount = request.POST['discount']
         req.description = request.POST['description']
         req.save()
-        success = 'سفارش جدید ثبت شد'
-        context = {'customers': customers , 'products':products, 'success':success}
+        success = 'سفارش جدید ثبت شد ، مشاهده سفارش'
+        link = get_object_or_404(models.Order_request, id=req.id)
+        context = {'customers': customers , 'products':products, 'success':success, 'link':link}
         return render(request, 'home/order_registration.html', context)
 
     context = {'customers': customers , 'products':products}
@@ -171,12 +207,52 @@ def order_edit(request, id):
         req.description = request.POST['description']
         req.status = request.POST['status']
         req.save()
-        success = 'ویرایش سفارش ثبت شد'
-        context = {'req':req, 'customers': customers , 'products':products, 'success':success}
+        success = 'ویرایش سفارش ثبت شد ، مشاهده سفارش'
+        link = get_object_or_404(models.Order_request, id=req.id)
+        context = {'req':req, 'customers': customers , 'products':products, 'success':success, 'link':link}
         return render(request, 'home/order_edit.html', context)
 
     context = {'req':req, 'customers': customers , 'products':products}
     html_template = loader.get_template('home/order_edit.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+@login_required(login_url="/login/")
+def customer_edit(request, id):
+    customer = get_object_or_404(models.Customer, id=id)
+    products = models.Product.objects.all().order_by('-date_created')
+    tagform = CustomerForm(request.POST)
+    if request.method=="POST":
+        if tagform.is_valid():
+
+            if request.POST.get('substantial'):
+                substantial = True
+            else:
+                substantial = False
+
+            customer.name = request.POST['name']
+            customer.phone = request.POST['phone']
+            customer.company = request.POST['company']
+            customer.address = request.POST['address']
+            customer.additional_information = request.POST['additional_information']
+            customer.substantial = substantial
+            customer.save()
+            customer.product_tag.set(tagform.cleaned_data.get("product_tag"))
+            success = 'ویرایش اطلاعات مشتری انجام شد ، مشاهده پروفایل'
+            link = get_object_or_404(models.Customer, id=req.id)
+
+            context = {'customer':customer, 'products':products, 'tagform':tagform, 'success':success, 'link':link}
+            return render(request, 'home/customer_edit.html', context)
+
+    context = {'customer':customer, 'products':products, 'tagform':tagform}
+    html_template = loader.get_template('home/customer_edit.html')
     return HttpResponse(html_template.render(context, request))
 
 

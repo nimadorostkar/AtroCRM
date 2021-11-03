@@ -48,6 +48,7 @@ class Product(models.Model):
 
 
 #------------------------------------------------------------------------------
+#name  unique=True
 class Customer(models.Model):
     name = models.CharField(max_length=200, verbose_name = "نام")
     phone = models.CharField(max_length=200, blank=True, null=True, verbose_name = "تلفن")
@@ -63,6 +64,9 @@ class Customer(models.Model):
 
     def get_absolute_url(self):
         return reverse('customer_detail',args=[self.id])
+
+    def get_absolute_edit_url(self):
+        return reverse('customer_edit',args=[self.id])
 
     @property
     def short_description(self):
