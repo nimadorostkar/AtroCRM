@@ -63,26 +63,29 @@
                  </div>
 
                  <div class="row">
-                   <div class="col-md-10 pr-md-4">
+                   <div class="col-md-12 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> اطلاعات تکمیلی </p></label>
                        <input name="additional_information" type="text" class="form-control">
-                     </div>
-                   </div>
-                   <div class="col-md-2 pr-md-4">
-                     <div class="form-group">
-                       <label><p class="text-xs text-secondary mb-0"> مشتری ویژه </p></label> <br>
-                       <input name="substantial" type="checkbox">
                      </div>
                    </div>
                   </div>
 
 
                    <div class="row">
-                     <div class="col-md-12 pr-md-4">
+                     <div class="col-md-2 pr-md-4">
+                         <div class="form-group">
+                           <label><p class="text-xs text-secondary mb-0"> مشتری ویژه </p></label> <br>
+                           <input name="substantial" type="checkbox">
+                         </div>
+                     </div>
+                     <div class="col-md-10 pr-md-4">
                        <div class="form-group">
-                         <label><p class="text-xs text-secondary mb-0"> تگ محصولی </p></label>
-                           {{ tagform }}
+                         <label><p class="text-xs text-secondary mb-0"> تگ محصولی </p></label><br>
+                          {% for product in products.all %}
+                            <label  for="ts1">{{product}}</label>
+                            <input type="checkbox" name="products" value="{{ product.pk }}" />
+                          {% endfor %}
                        </div>
                      </div>
                     </div>

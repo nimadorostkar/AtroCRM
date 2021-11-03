@@ -24,7 +24,7 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <h6> ویرایش مشتری </h6> <p class="text-xs text-secondary mb-0"> تغییرات مد نظر را اعمال کنید  </p> <hr>
+          <h6> ویرایش {{customer.name}} </h6> <p class="text-xs text-secondary mb-0"> تغییرات مد نظر را اعمال کنید  </p> <hr>
         </div>
         <div class="card-body px-7 pt-4 pb-2">
 
@@ -63,36 +63,33 @@
                  </div>
 
                  <div class="row">
-                   <div class="col-md-10 pr-md-4">
+                   <div class="col-md-12 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> اطلاعات تکمیلی </p></label>
                        <input name="additional_information" type="text" value="{{customer.additional_information}}" class="form-control">
                      </div>
                    </div>
-                   <div class="col-md-2 pr-md-4">
-                     <div class="form-group">
-                       <label><p class="text-xs text-secondary mb-0"> مشتری ویژه </p></label> <br>
-                       <input name="substantial"  type="checkbox" {% if customer.substantial %} checked {% endif%} >
-                     </div>
-                   </div>
                   </div>
 
 
-                   <div class="row">
-                     <div class="col-md-12 pr-md-4">
+                    <div class="row">
+                      <div class="col-md-2 pr-md-4">
+                          <div class="form-group">
+                            <label><p class="text-xs text-secondary mb-0"> مشتری ویژه </p></label> <br>
+                            <input name="substantial"  type="checkbox" {% if customer.substantial %} checked {% endif%} >
+                          </div>
+                        </div>
+                     <div class="col-md-10 pr-md-4">
                        <div class="form-group">
                          <label><p class="text-xs text-secondary mb-0"> تگ محصولی </p></label>
-                           {{ tagform }}
+                           {% for Product in products %}
+                             <label  for="ts1">{{Product}}</label>
+                             <input type="checkbox" name="products" value="{{ Product.pk }}" {% if Product in customer.product_tag.all %} checked {% endif%}  />
+                           {% endfor %}
                        </div>
                      </div>
                     </div>
 
-                    <hr>
-
-                    {% for Product in products %}
-                      <label  for="ts1">{{Product}}</label>
-                      <input type="checkbox" name="products" value="{{ Product.pk }}" />
-                    {% endfor %}
 
 
                  <div class="card-footer" align="center">

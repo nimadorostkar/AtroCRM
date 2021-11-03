@@ -23,7 +23,7 @@ class TimeForm(forms.ModelForm):
 
 
 
-
+'''
 #------------------------------------------------------------------------------
 class CustomerForm(forms.ModelForm):
     class Meta:
@@ -35,8 +35,7 @@ class CustomerForm(forms.ModelForm):
         self.fields['product_tag'] = forms.ModelMultipleChoiceField(queryset=Product.objects.all(), widget=forms.CheckboxSelectMultiple )
         self.fields['product_tag'].required = False
         self.fields['product_tag'].label = False
-
-
+'''
 
 
 

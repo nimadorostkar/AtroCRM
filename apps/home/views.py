@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from . import models
 from django.contrib.auth.models import User
 from .models import Product, Order_request, Customer, Order_incomings
-from .forms import TimeForm, CustomerForm
+from .forms import TimeForm
 from itertools import chain
 from django.contrib.auth import get_user_model
 from django.db import transaction
@@ -90,33 +90,38 @@ def customer_detail(request, id):
 @login_required(login_url="/login/")
 def customer_registration(request):
     products = models.Product.objects.all().order_by('-date_created')
-    tagform = CustomerForm(request.POST)
     if request.method=="POST":
-        if tagform.is_valid():
 
-            if request.POST.get('substantial'):
-                substantial = True
-            else:
-                substantial = False
+        if request.POST.get('substantial'):
+            substantial = True
+        else:
+            substantial = False
 
-            new = Customer()
-            new.name = request.POST['name']
-            new.phone = request.POST['phone']
-            new.company = request.POST['company']
-            new.address = request.POST['address']
-            new.additional_information = request.POST['additional_information']
-            new.substantial = substantial
-            new.save()
-            new.product_tag.set(tagform.cleaned_data.get("product_tag"))
-            success = 'مشتری جدید ایجاد شد ، مشاهده پروفایل'
-            link = get_object_or_404(models.Customer, id=new.id)
+        new = Customer()
+        new.name = request.POST['name']
+        new.phone = request.POST['phone']
+        new.company = request.POST['company']
+        new.address = request.POST['address']
+        new.additional_information = request.POST['additional_information']
+        new.substantial = substantial
+        new.save()
+        get_products = request.POST.getlist('products')
+        for product in get_products:
+           if Product.objects.all().exists():
+              product = Product.objects.get(id=product)
+              new.product_tag.add(product)
 
-            context = {'products':products, 'tagform':tagform, 'success':success, 'link':link}
-            return render(request, 'home/customer_registration.html', context)
+        success = 'مشتری جدید ایجاد شد ، مشاهده پروفایل'
+        link = get_object_or_404(models.Customer, id=new.id)
 
-    context = {'products':products, 'tagform':tagform}
+        context = {'products':products, 'success':success, 'link':link}
+        return render(request, 'home/customer_registration.html', context)
+
+    context = {'products':products}
     html_template = loader.get_template('home/customer_registration.html')
     return HttpResponse(html_template.render(context, request))
+
+
 
 
 
@@ -228,30 +233,36 @@ def order_edit(request, id):
 def customer_edit(request, id):
     customer = get_object_or_404(models.Customer, id=id)
     products = models.Product.objects.all().order_by('-date_created')
-    tagform = CustomerForm(request.POST)
+
     if request.method=="POST":
-        if tagform.is_valid():
 
-            if request.POST.get('substantial'):
-                substantial = True
-            else:
-                substantial = False
+        if request.POST.get('substantial'):
+            substantial = True
+        else:
+            substantial = False
 
-            customer.name = request.POST['name']
-            customer.phone = request.POST['phone']
-            customer.company = request.POST['company']
-            customer.address = request.POST['address']
-            customer.additional_information = request.POST['additional_information']
-            customer.substantial = substantial
-            customer.save()
-            customer.product_tag.set(tagform.cleaned_data.get("product_tag"))
-            success = 'ویرایش اطلاعات مشتری انجام شد ، مشاهده پروفایل'
-            link = get_object_or_404(models.Customer, id=req.id)
+        customer.name = request.POST['name']
+        customer.phone = request.POST['phone']
+        customer.company = request.POST['company']
+        customer.address = request.POST['address']
+        customer.additional_information = request.POST['additional_information']
+        customer.substantial = substantial
+        customer.save()
 
-            context = {'customer':customer, 'products':products, 'tagform':tagform, 'success':success, 'link':link}
-            return render(request, 'home/customer_edit.html', context)
+        get_products = request.POST.getlist('products')
+        for product in get_products:
+           if Product.objects.all().exists():
+              product = Product.objects.get(id=product)
+              customer.product_tag.add(product)
 
-    context = {'customer':customer, 'products':products, 'tagform':tagform}
+
+        success = 'ویرایش اطلاعات مشتری انجام شد ، مشاهده پروفایل'
+        link = get_object_or_404(models.Customer, id=customer.id)
+
+        context = {'customer':customer, 'products':products, 'success':success, 'link':link}
+        return render(request, 'home/customer_edit.html', context)
+
+    context = {'customer':customer, 'products':products}
     html_template = loader.get_template('home/customer_edit.html')
     return HttpResponse(html_template.render(context, request))
 
