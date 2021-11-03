@@ -24,7 +24,7 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <h6>  ویرایش </h6> <p class="text-xs text-secondary mb-0"> ویرایش سفارش ggggg </p> <hr>
+          <h6>  ویرایش </h6> <p class="text-xs text-secondary mb-0"> ویرایش {{ req }} </p> <hr>
         </div>
         <div class="card-body px-7 pt-4 pb-2">
 
@@ -36,8 +36,11 @@
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> خریدار </p></label>
                        <select name="customer" class="form-control selectpicker" data-live-search="true">
+                          <option data-tokens="{{req.customer.name}}" value={{req.customer.id}} selected >{{req.customer.name}}</option>
                          {% for Customer in customers %}
+                          {% if Customer != req.customer %}
                            <option data-tokens="{{Customer.name}}" value={{Customer.id}}>{{Customer.name}}</option>
+                          {% endif %}
                          {% endfor %}
                        </select>
                      </div>
@@ -47,8 +50,11 @@
                      <div class="form-group">
                      <label><p class="text-xs text-secondary mb-0"> محصول </p></label>
                       <select name="product" class="form-control selectpicker" data-live-search="true">
+                        <option data-tokens="{{req.product.name}}" value={{req.product.id}} selected >{{req.product.name}}</option>
                         {% for Product in products %}
-                         <option data-tokens="{{Product.name}}" value={{Product.id}}>{{Product.name}}</option>
+                         {% if Product != req.product %}
+                          <option data-tokens="{{Product.name}}" value={{Product.id}}>{{Product.name}}</option>
+                         {% endif %}
                         {% endfor %}
                       </select>
                     </div>
@@ -57,24 +63,36 @@
                   <div class="col-md-2 pr-md-4">
                     <div class="form-group">
                       <label><p class="text-xs text-secondary mb-0"> تعداد </p></label>
-                      <input name="qty" type="number" value="1" class="form-control">
+                      <input name="qty" type="number" value="{{req.qty}}" class="form-control">
                     </div>
                   </div>
 
                    <div class="col-md-2 pl-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> درصد تخفیف </p></label>
-                       <input name="discount" type="number" value="0" class="form-control">
+                       <input name="discount" type="number" value="{{req.discount}}" class="form-control">
                      </div>
                    </div>
 
                  </div>
 
                  <div class="row">
-                   <div class="col-md-12 pr-md-4">
+                   <div class="col-md-10 pr-md-4">
                      <div class="form-group">
                        <label><p class="text-xs text-secondary mb-0"> توضیحات </p></label>
-                       <input name="description" type="text" class="form-control">
+                       <input name="description" type="text" value="{{req.description}}" class="form-control">
+                     </div>
+                   </div>
+                   <div class="col-md-2 pr-md-4">
+                     <div class="form-group">
+                       <label><p class="text-xs text-secondary mb-0"> وضعیت </p></label>
+                       <select name="status" class="form-control selectpicker" data-live-search="true">
+                          <option {% if req.status == "تکمیل شده" %} selected {% endif%} data-tokens="تکمیل شده" value="تکمیل شده"> تکمیل شده </option>
+                          <option {% if req.status == "لغو شده" %} selected {% endif%} data-tokens="لغو شده" value="لغو شده"> لغو شده </option>
+                          <option {% if req.status == "دریافت پیش پرداخت" %} selected {% endif%} data-tokens="دریافت پیش پرداخت" value="دریافت پیش پرداخت"> دریافت پیش پرداخت </option>
+                          <option {% if req.status == "در حال بررسی" %} selected {% endif%} data-tokens="در حال بررسی" value="در حال بررسی"> در حال بررسی </option>
+                          <option {% if req.status == "جدید" %} selected {% endif%} data-tokens="جدید" value="جدید"> جدید </option>
+                       </select>
                      </div>
                    </div>
                  </div>

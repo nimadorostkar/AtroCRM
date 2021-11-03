@@ -158,24 +158,24 @@ def order_registration(request):
 
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
-def order_edit(request):
+def order_edit(request, id):
+    req = get_object_or_404(models.Order_request, id=id)
     customers = models.Customer.objects.all().order_by('-date_created')
     products = models.Product.objects.all().order_by('-date_created')
     if request.method=="POST":
-        req = Order_request()
         req.user = request.user
         req.customer = get_object_or_404(models.Customer, id=request.POST.get('customer'))
         req.product = get_object_or_404(models.Product, id=request.POST.get('product'))
         req.qty = request.POST['qty']
         req.discount = request.POST['discount']
         req.description = request.POST['description']
+        req.status = request.POST['status']
         req.save()
         success = 'ویرایش سفارش ثبت شد'
-        context = {'customers': customers , 'products':products, 'success':success}
+        context = {'req':req, 'customers': customers , 'products':products, 'success':success}
         return render(request, 'home/order_edit.html', context)
 
-    context = {'customers': customers , 'products':products}
-    #context = {'segment': 'products'}
+    context = {'req':req, 'customers': customers , 'products':products}
     html_template = loader.get_template('home/order_edit.html')
     return HttpResponse(html_template.render(context, request))
 

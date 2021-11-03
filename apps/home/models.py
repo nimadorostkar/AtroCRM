@@ -49,10 +49,10 @@ class Product(models.Model):
 
 #------------------------------------------------------------------------------
 class Customer(models.Model):
-    name = models.CharField(max_length=200, null=True,verbose_name = "نام")
-    phone = models.CharField(max_length=200, null=True,verbose_name = "تلفن")
-    company = models.CharField(max_length=200, null=True,verbose_name = "نام شرکت")
-    address = models.CharField(max_length=400, null=True,verbose_name = "آدرس")
+    name = models.CharField(max_length=200, verbose_name = "نام")
+    phone = models.CharField(max_length=200, blank=True, null=True, verbose_name = "تلفن")
+    company = models.CharField(max_length=200, blank=True, null=True, verbose_name = "نام شرکت")
+    address = models.CharField(max_length=400, blank=True, null=True, verbose_name = "آدرس")
     additional_information = models.TextField(max_length=1000,null=True, blank=True,verbose_name = "اطلاعات تکمیلی")
     substantial = models.BooleanField(default=False, verbose_name = "مشتری ویژه" )
     product_tag = models.ManyToManyField(Product, blank=True, verbose_name = "تگ محصولی")
@@ -103,6 +103,9 @@ class Order_request(models.Model):
 
     def get_absolute_url(self):
         return reverse('order_req_detail',args=[self.id])
+
+    def get_absolute_edit_url(self):
+        return reverse('order_edit',args=[self.id])
 
     class Meta:
         verbose_name = "سفارش"
