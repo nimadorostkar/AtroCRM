@@ -74,7 +74,6 @@ def search(request):
 def products(request):
     products = models.Product.objects.all().order_by('-date_created')
     context = {'products': products }
-    #context = {'segment': 'products'}
     html_template = loader.get_template('home/products.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -95,7 +94,6 @@ def product_detail(request, id):
 def customers(request):
     customers = models.Customer.objects.all().order_by('-date_created')
     context = {'customers': customers }
-    #context = {'segment': 'products'}
     html_template = loader.get_template('home/customers.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -158,7 +156,6 @@ def customer_registration(request):
 def order_requests(request):
     reqs = models.Order_request.objects.all().order_by('-date_created')
     context = {'reqs': reqs }
-    #context = {'segment': 'products'}
     html_template = loader.get_template('home/order_requests.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -211,7 +208,6 @@ def order_registration(request):
         return render(request, 'home/order_registration.html', context)
 
     context = {'customers': customers , 'products':products}
-    #context = {'segment': 'products'}
     html_template = loader.get_template('home/order_registration.html')
     return HttpResponse(html_template.render(context, request))
 
