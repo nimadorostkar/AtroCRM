@@ -14,7 +14,7 @@ from django.db import transaction
 from django.urls import reverse
 from django.db.models import Q
 import datetime
-
+from django.contrib import messages
 
 
 
@@ -49,21 +49,15 @@ def etc(request):
 #------------------------------------------------------------------------------
 @login_required
 def search(request):
-    '''
     if request.method=="POST":
         search = request.POST['q']
         if search:
-            material = models.Material.objects.filter(Q(name__icontains=search) | Q(description__icontains=search))
-            product = models.Product.objects.filter(Q(name__icontains=search))
-            station = models.Station.objects.filter(Q(name__icontains=search) | Q(description__icontains=search))
-            match = chain(material, product, station)
-            if match:
-                return render(request,'home/search.html', {'sr': match})
-            else:
-                messages.error(request,  '   چیزی یافت نشد ، لطفا مجددا جستجو کنید ' )
+            customer = models.Customer.objects.filter(Q(name__icontains=search) | Q(additional_information__icontains=search) | Q(phone__icontains=search) | Q(company__icontains=search) )
+            product = models.Product.objects.filter(Q(name__icontains=search)  | Q(description__icontains=search) )
+            order_req = models.Order_request.objects.filter(Q(customer__name__icontains=search) | Q(product__name__icontains=search) | Q(description__icontains=search))
+            return render(request,'home/search.html', {'customer':customer, 'product':product, 'order_req':order_req})
         else:
             return HttpResponseRedirect('/search')
-            '''
     return render(request, 'home/search.html', {})
 
 

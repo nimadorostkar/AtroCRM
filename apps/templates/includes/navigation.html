@@ -98,13 +98,13 @@
 
 
         <div class="ms-md-auto ps-md-3 d-flex align-items-center">
-          <div class="bg-white border-radius-lg d-flex">
-            <form action="{% url 'search' %}" method="post">
-              {% csrf_token %}
+          <form action="{% url 'search' %}" method="post">
+            {% csrf_token %}
+            <div class="bg-white border-radius-lg d-flex">
               <input type="text" name="q" class="form-control border-0 ps-3" placeholder="اینجا تایپ کنید...">
               <button class="btn bg-gradient-info my-1 me-1">جستجو</button>
-            </form>
-          </div>
+             </div>
+          </form>
         </div>
     </div>
   </nav>
