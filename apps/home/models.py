@@ -48,9 +48,8 @@ class Product(models.Model):
 
 
 #------------------------------------------------------------------------------
-#name  unique=True
 class Customer(models.Model):
-    name = models.CharField(max_length=200, verbose_name = "نام")
+    name = models.CharField(max_length=200, unique=True, verbose_name = "نام")
     phone = models.CharField(max_length=200, blank=True, null=True, verbose_name = "تلفن")
     company = models.CharField(max_length=200, blank=True, null=True, verbose_name = "نام شرکت")
     address = models.CharField(max_length=400, blank=True, null=True, verbose_name = "آدرس")
