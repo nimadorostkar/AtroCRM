@@ -249,7 +249,8 @@ def customer_edit(request, id):
         customer.substantial = substantial
         customer.save()
 
-        print(customer.product_tag.all)
+        customer.product_tag.clear()
+
         get_products = request.POST.getlist('products')
         for product in get_products:
            if Product.objects.all().exists():
