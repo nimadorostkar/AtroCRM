@@ -16,7 +16,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200, unique=True, verbose_name = "نام")
     inventory = models.IntegerField(default='1', verbose_name = "موجودی")
     price = models.IntegerField( verbose_name = "قیمت ( ریال )")
-    description = models.TextField(max_length=900,null=True, blank=True,verbose_name = "توضیحات")
+    description = models.TextField(max_length=5000,null=True, blank=True,verbose_name = "توضیحات")
     image = models.ImageField(upload_to='media', default='media/Default.png', verbose_name = "تصویر")
     date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ")
 
@@ -49,7 +49,7 @@ class Product(models.Model):
 
 #------------------------------------------------------------------------------
 class Customer(models.Model):
-    name = models.CharField(max_length=200, unique=True, verbose_name = "نام")
+    name = models.CharField(max_length=200, verbose_name = "نام")
     phone = models.CharField(max_length=200, blank=True, null=True, verbose_name = "تلفن")
     company = models.CharField(max_length=200, blank=True, null=True, verbose_name = "نام شرکت")
     address = models.CharField(max_length=400, blank=True, null=True, verbose_name = "آدرس")

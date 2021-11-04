@@ -15,8 +15,8 @@ from django.urls import reverse
 from django.db.models import Q
 import datetime
 from django.contrib import messages
-
-
+from django.views import generic
+from django.utils.decorators import method_decorator
 
 
 
@@ -65,17 +65,18 @@ def search(request):
 
 
 
-
-
-
-
 #------------------------------------------------------------------------------
-@login_required(login_url="/login/")
-def products(request):
-    products = models.Product.objects.all().order_by('-date_created')
-    context = {'products': products }
-    html_template = loader.get_template('home/products.html')
-    return HttpResponse(html_template.render(context, request))
+class products(generic.ListView):
+    model = Product
+    template_name = 'home/products.html'
+    context_object_name = 'products'
+    queryset = Product.objects.all()
+    ordering = ['-date_created']
+    paginate_by = 20
+
+
+
+
 
 
 @login_required()
@@ -89,15 +90,21 @@ def product_detail(request, id):
 
 
 
+
 #------------------------------------------------------------------------------
-@login_required(login_url="/login/")
-def customers(request):
-    customers = models.Customer.objects.all().order_by('-date_created')
-    context = {'customers': customers }
-    html_template = loader.get_template('home/customers.html')
-    return HttpResponse(html_template.render(context, request))
+class customers(generic.ListView):
+    model = Customer
+    template_name = 'home/customers.html'
+    context_object_name = 'customers'
+    queryset = Customer.objects.all()
+    ordering = ['-date_created']
+    paginate_by = 30
 
 
+
+
+
+#------------------------------------------------------------------------------
 @login_required()
 def customer_detail(request, id):
     customer = get_object_or_404(models.Customer, id=id)
@@ -151,13 +158,17 @@ def customer_registration(request):
 
 
 
+
 #------------------------------------------------------------------------------
-@login_required(login_url="/login/")
-def order_requests(request):
-    reqs = models.Order_request.objects.all().order_by('-date_created')
-    context = {'reqs': reqs }
-    html_template = loader.get_template('home/order_requests.html')
-    return HttpResponse(html_template.render(context, request))
+class order_requests(generic.ListView):
+    model = Order_request
+    template_name = 'home/order_requests.html'
+    context_object_name = 'reqs'
+    queryset = Order_request.objects.all()
+    ordering = ['-date_created']
+    paginate_by = 30
+
+
 
 
 @login_required()
@@ -176,8 +187,8 @@ def order_req_detail(request, id):
             incoming.amount = request.POST['amount']
             incoming.date_created = timeform.cleaned_data['date_created']
             incoming.save()
-            context = {'req':req, 'incomings':incomings, 'timeform':timeform, 'total_price':total_price, 'total_incoming':total_incoming, 'remained':remained}
-            return render(request, 'home/order_req_detail.html', context)
+            return redirect(req.get_absolute_url())
+
 
     context = {'req':req, 'incomings':incomings, 'timeform':timeform, 'total_price':total_price, 'total_incoming':total_incoming, 'remained':remained}
     return render(request, 'home/order_req_detail.html', context)
