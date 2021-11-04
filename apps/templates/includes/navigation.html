@@ -25,8 +25,12 @@
 
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                {% if new_req_counts == 0 %}
+                <i class="fa fa-bell cursor-pointer"></i>
+                {% else %}
                 <i style="color:Tomato;" class="fa fa-bell cursor-pointer btn-outline-danger"></i>
-                 <sup style="color:Tomato;" class="btn-outline-danger"> <small> {{ new_req_counts }} </small> </sup>
+                <sup style="color:Tomato;" class="btn-outline-danger"> <small> {{ new_req_counts }} </small> </sup>
+                {% endif %}
               </a>
               <ul class="dropdown-menu px-2 py-3 ms-sm-n4" aria-labelledby="dropdownMenuButton">
                {% for Order_request in new_reqs %}
