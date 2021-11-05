@@ -23,7 +23,11 @@ from django.utils.decorators import method_decorator
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def index(request):
-    context = {'segment': 'index'}
+    open_reqs_count = models.Order_request.objects.all().exclude(status='تکمیل شده').count()
+    customers_count = models.Customer.objects.all().count()
+    products_count = models.Product.objects.all().count()
+    new_order_count = models.Order_request.objects.filter(status='جدید').count()
+    context = {'open_reqs_count': open_reqs_count, 'customers_count':customers_count , 'products_count':products_count, 'new_order_count':new_order_count }
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
@@ -203,7 +207,7 @@ def order_req_detail(request, id):
 @login_required(login_url="/login/")
 def order_registration(request):
     customers = models.Customer.objects.all().order_by('-date_created')
-    products = models.Product.objects.all().order_by('-date_created')
+    products = models.Product.objects.filter(available=True).order_by('-date_created')
     if request.method=="POST":
         req = Order_request()
         req.user = request.user
