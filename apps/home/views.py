@@ -20,6 +20,8 @@ from django.utils.decorators import method_decorator
 
 
 
+
+
 #------------------------------------------------------------------------------
 @login_required(login_url="/login/")
 def index(request):
@@ -31,6 +33,10 @@ def index(request):
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
+
+
+
+
 
 
 
