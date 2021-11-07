@@ -17,7 +17,7 @@ class TimeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(TimeForm, self).__init__(*args, **kwargs)
         self.fields['date_created'] = JalaliDateField( widget=AdminJalaliDateWidget(attrs={'style':'width:15px; height:37px'}) )
-        self.fields['date_created'].required = False
+        self.fields['date_created'].required = True
         self.fields['date_created'].label = False
 
 

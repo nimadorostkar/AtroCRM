@@ -180,12 +180,14 @@
                       <div class="row">
                         <div class="col-md-10 pr-md-2">
                           <div class="form-group">
-                            <input name="amount" type="number" placeholder="مبلغ..." class="form-control">
+                            <input name="amount" type="number" placeholder="مبلغ..." class="form-control" required>
                           </div>
                         </div>
                         <div class="col-md-2">
                           <div class="form-group">
-                            {{ timeform }}
+                            {% for field in timeform %}
+                                {{ field }}
+                            {% endfor %}
                           </div>
                         </div>
                       </div>
