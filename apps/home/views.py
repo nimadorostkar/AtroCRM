@@ -30,10 +30,12 @@ def index(request):
     products_count = models.Product.objects.all().count()
     new_order_count = models.Order_request.objects.filter(status='جدید').count()
 
-    products_id_chart = models.Order_request.objects.filter(status='تکمیل شده').values_list('product', flat=True).order_by('-date_created')
-    print(products_id_chart)
+    #chartList = list(models.Order_request.objects.filter(status='تکمیل شده').values_list('product_id', flat=True).distinct())
 
-    context = {'open_reqs_count': open_reqs_count, 'customers_count':customers_count , 'products_count':products_count, 'new_order_count':new_order_count }
+    productData = list(models.Order_request.objects.filter(status='تکمیل شده' , product__id=1).values_list('qty', flat=True))
+    print(productData)
+
+    context = {'open_reqs_count': open_reqs_count, 'customers_count':customers_count , 'products_count':products_count, 'new_order_count':new_order_count, 'productData':productData }
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
