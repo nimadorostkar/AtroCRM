@@ -95,7 +95,7 @@ class Order_request(models.Model):
     CHOICES = ( ('تکمیل شده','تکمیل شده'), ('لغو شده','لغو شده'), ('دریافت پیش پرداخت','دریافت پیش پرداخت'), ('در حال بررسی','در حال بررسی'), ('جدید','جدید'))
     status = models.CharField(max_length=30,choices=CHOICES, default='جدید', verbose_name = "وضعیت")
     date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ")
-    #date_updated = jmodels.jDateTimeField(auto_now=True, verbose_name = "تاریخ")
+    date_updated = jmodels.jDateTimeField(auto_now=True, verbose_name = "آخرین ویرایش")
 
 
     def __str__(self):
