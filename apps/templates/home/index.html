@@ -148,9 +148,6 @@
   <script src="/static/assets/js/plugins/Chart.extension.js"></script>
   <script>
 
-
-
-
     var ctx2 = document.getElementById("chart-line").getContext("2d");
 
     var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
@@ -166,48 +163,36 @@
     gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
 
 
+
+    function generateRandomColor()
+    {
+       var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+       return randomColor;
+    }
+
+
+     var dataset = [
+     {% for Chart in chart %}
+       {
+       label: '{{ Chart.product }}',
+       tension: 0.4,
+       borderWidth: 0,
+       pointRadius: 0,
+       borderColor: generateRandomColor(),
+       borderWidth: 3,
+       backgroundColor: gradientStroke1,
+       data: {{ Chart.qty }},
+       maxBarThickness: 6
+       },
+     {% endfor %}
+     ];
+
+
     new Chart(ctx2, {
       type: "line",
       data: {
         labels: ["۹ ماه پیش", "۸ ماه پیش", "۷ ماه پیش", "۶ ماه پیش", "۵ ماه پیش", "۴ ماه پیش", "۳ ماه پیش", "۲ ماه پیش", "۱ ماه پیش"],
-        datasets: [
-         {
-            label: "tampo",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#cb0c9f",
-            borderWidth: 3,
-            backgroundColor: gradientStroke1,
-            data: [0, 0, 0, 0, 0, 0, 0, 0, 7],
-            maxBarThickness: 6
-
-          },
-          {
-            label: "crm",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#3A416F",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            data: [2, 1, 1, 5, 0, 0, 0, 1, 1],
-            maxBarThickness: 6
-
-          },
-          {
-            label: "others",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#FFA500",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            data: [2, 3, 1, 0, 10, 0, 0, 0, 3],
-            maxBarThickness: 6
-
-          },
-        ],
+        datasets: dataset,
       },
       options: {
         responsive: true,
@@ -272,48 +257,6 @@
   </script>
 
 
-
-
-
-
-
-
-  <script>
-
-    var chartdata = {{ chartdata|safe} };
-
-/*       var input_data = [
-           {% for Data in chart_data %}
-            { product:'{{ Data.product }}', qty:{{ Data.qty }} },
-           {% endfor %}
-        ];
-
-        console.log(input_data);
-
-
-
-        console.log('---------------------------');
-
-
-
-        var conclusion_data = exitorders.reduce(function (agg, obj) {
-          var objForCode = agg.filter(function (codeObj) { return codeObj.product === obj.product})[0]
-
-          if (objForCode) {
-            objForCode.totalQty += obj.qty;
-          } else {
-            agg.push({
-              product: obj.product,
-              totalQty: obj.qty
-            })
-          }
-          return agg;
-        }, [])
-
-        console.log(conclusion_data);
-
-*/
-  </script>
 
 
 

@@ -14,9 +14,11 @@ from django.db import transaction
 from django.urls import reverse
 from django.db.models import Q
 import datetime
+import jdatetime
 from django.contrib import messages
 from django.views import generic
 from django.utils.decorators import method_decorator
+
 
 
 
@@ -30,12 +32,37 @@ def index(request):
     products_count = models.Product.objects.all().count()
     new_order_count = models.Order_request.objects.filter(status='جدید').count()
 
-    #chartList = list(models.Order_request.objects.filter(status='تکمیل شده').values_list('product_id', flat=True).distinct())
+    chartList = list(models.Order_request.objects.filter(status='تکمیل شده').values_list('product_id', flat=True).distinct())
+    now = jdatetime.datetime.now()
+    chart = []
 
-    productData = list(models.Order_request.objects.filter(status='تکمیل شده' , product__id=1).values_list('qty', flat=True))
-    print(productData)
+    for Order in chartList:
+        products = models.Order_request.objects.filter(status='تکمیل شده' , product__id=Order)
+        qty_sum=[0,0,0,0,0,0,0,0,0]
+        for Product in products:
+            if Product.date_created.year == now.year:
+                if (now.month - Product.date_created.month)==0:
+                    qty_sum[8] += Product.qty
+                elif (now.month - Product.date_created.month)==1:
+                    qty_sum[7] += Product.qty
+                elif (now.month - Product.date_created.month)==2:
+                    qty_sum[6] += Product.qty
+                elif (now.month - Product.date_created.month)==3:
+                    qty_sum[5] += Product.qty
+                elif (now.month - Product.date_created.month)==4:
+                    qty_sum[4] += Product.qty
+                elif (now.month - Product.date_created.month)==5:
+                    qty_sum[3] += Product.qty
+                elif (now.month - Product.date_created.month)==6:
+                    qty_sum[2] += Product.qty
+                elif (now.month - Product.date_created.month)==7:
+                    qty_sum[1] += Product.qty
+                elif (now.month - Product.date_created.month)==8:
+                    qty_sum[0] += Product.qty
+        chart_product = { 'product':Product.product.name, 'qty':qty_sum}
+        chart.append(chart_product)
 
-    context = {'open_reqs_count': open_reqs_count, 'customers_count':customers_count , 'products_count':products_count, 'new_order_count':new_order_count, 'productData':productData }
+    context = {'open_reqs_count': open_reqs_count, 'customers_count':customers_count , 'products_count':products_count, 'new_order_count':new_order_count, 'chart':chart }
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
