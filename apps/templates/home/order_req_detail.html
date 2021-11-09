@@ -112,6 +112,9 @@
 
                   <div class="col-lg-6" dir="ltr">
                     <p> <span class="text-xs text-secondary mb-0"> کارشناس فروش : </span> {{ req.user.first_name }} {{ req.user.last_name }} </p>
+
+                    <p align="left" dir="rtl" class="text-secondary text-xxs"> آخرین ویرایش: {{ req.date_updated|date:'H:i  Y-m-d' }} </p>
+
                     <p class="text-xs text-secondary mb-0">
                       {% if req.status == 'تکمیل شده' %}
                         <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
