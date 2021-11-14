@@ -24,5 +24,4 @@ urlpatterns = [
     path('order_registration', views.order_registration, name='order_registration'),
     path('order_edit/<int:id>/', views.order_edit, name='order_edit'),
     path('order_invoice/<int:id>/', views.order_invoice, name='order_invoice'),
-    path('order_pre_invoice/<int:id>/', views.order_pre_invoice, name='order_pre_invoice'),
 ]

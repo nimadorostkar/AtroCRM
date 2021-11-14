@@ -316,18 +316,6 @@ def order_invoice(request, id):
 
 
 
-#------------------------------------------------------------------------------
-@login_required(login_url="/login/")
-def order_pre_invoice(request, id):
-    req = get_object_or_404(models.Order_request, id=id)
-    context = {'req':req}
-    html_template = loader.get_template('home/pre_invoice.html')
-    return HttpResponse(html_template.render(context, request))
-
-
-
-
-
 
 
 

@@ -114,9 +114,6 @@ class Order_request(models.Model):
     def get_absolute_invoice_url(self):
         return reverse('order_invoice',args=[self.id])
 
-    def get_absolute_pre_invoice_url(self):
-        return reverse('order_pre_invoice',args=[self.id])
-
     class Meta:
         verbose_name = "سفارش"
         verbose_name_plural = "سفارشات"
