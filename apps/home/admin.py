@@ -37,7 +37,7 @@ admin.site.register(models.Product, ProductAdmin)
 #------------------------------------------------------------------------------
 class CustomerAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('name', 'phone', 'company', 'address', 'short_description')
-    list_filter = ("date_created", "product_tag")
+    list_filter = ("substantial", "date_created", "product_tag")
     search_fields = ['name',]
     raw_id_fields = ('product_tag',)
     actions = [export_as_csv_action("CSV خروجی", fields=['id', 'name', 'phone', 'company', 'address', 'additional_information', 'substantial' ])]
