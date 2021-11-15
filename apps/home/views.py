@@ -307,7 +307,8 @@ def order_edit(request, id):
 @login_required(login_url="/login/")
 def order_invoice(request, id):
     req = get_object_or_404(models.Order_request, id=id)
-    context = {'req':req}
+    total_price = (req.product.price * req.qty) - ((req.product.price * req.qty)*(req.discount/100))
+    context = {'req':req, 'total_price':total_price}
     html_template = loader.get_template('home/invoice.html')
     return HttpResponse(html_template.render(context, request))
 

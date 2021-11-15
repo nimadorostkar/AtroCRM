@@ -12,13 +12,15 @@
 <body>
 
 
+{% load jalali_tags %}
+
 
 <div class="container invoice">
   <div class="invoice-header">
     <div class="row">
       <div class="col-xs-5">
         <h3> صورت حساب </h3>
-        <h5 class="text-muted"> شماره: hhhhh  |  تاریخ: gggggg </h5>
+        <h5 class="text-muted"> شماره: {{ req.id }}  |  تاریخ: {{ req.date_created|date:'d-m-Y' }} </h5>
       </div>
       <div class="col-xs-7">
         <div class="media">
@@ -29,7 +31,7 @@
             </li>
           </ul>
           <div class="media-left">
-            <img class="media-object logo" src="https://dummyimage.com/70x70/000/fff&text=ACME" />
+            <img src="/static/assets/img/biglogo.png" class="media-object logo" alt="...">
           </div>
         </div>
       </div>
@@ -49,13 +51,13 @@
           <div class="panel-body">
             <dl class="dl-horizontal">
               <dt> نام </dt>
-              <dd> tttt </dd>
+              <dd> <span class="text-muted">  آقا/خانم  </span> &nbsp; {{ req.customer.name }} </dd>
               <dt> نام شرکت </dt>
-              <dd> tttt </dd>
+              <dd> {{ req.customer.company }} </dd>
               <dt>تلفن</dt>
-              <dd> ttttttt </dd>
+              <dd> {{ req.customer.phone }} </dd>
               <dt> آدرس </dt>
-              <dd>  ttttttt ttttttt tttttttttt </dd>
+              <dd> {{ req.customer.address }} </dd>
               <dt>&nbsp;</dt>
               <dd>&nbsp;</dd>
           </div>
@@ -99,29 +101,29 @@
         <thead>
           <tr>
             <th class="text-center"> نام </th>
-            <th class="text-center colfix"> تعداد </th>
-            <th class="text-center colfix"> قیمت واحد </th>
-            <th class="text-center colfix"> درصد تخفیف </th>
-            <th class="text-center colfix"> مجموع </th>
+            <th class="text-center"> تعداد </th>
+            <th class="text-center"> قیمت واحد </th>
+            <th class="text-center"> درصد تخفیف </th>
+            <th class="text-center"> مجموع </th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="text-center"> ماشین قلاویز زنی اتومات </td>
+            <td class="text-center"> {{ req.product }} </td>
             <td class="text-center">
-              <span class="mono"> ۲ </span>
+              <span class="mono"> {{ req.qty }} </span>
               <small class="text-muted"> عدد </small>
             </td>
             <td class="text-center">
-              <span class="mono"> ۱۸۰۰۰۰۰۰ </span>
+              <span class="mono"> {{ req.product.price }} </span>
               <small class="text-muted"> ریال </small>
             </td>
             <td class="text-center">
-              <span class="mono"> 0 </span>
+              <span class="mono"> {{ req.discount }} </span>
               <small class="text-muted"> % </small>
             </td>
             <td class="text-center">
-              <span class="mono"> 200000 </span>
+              <span class="mono"> {{ total_price }} </span>
               <small class="text-muted"> ریال </small>
             </td>
           </tr>
