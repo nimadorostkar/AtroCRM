@@ -20,7 +20,7 @@
     <div class="row">
       <div class="col-xs-5">
         <h3> صورت حساب </h3>
-        <h5 class="text-muted"> شماره: {{ req.id }}  |  تاریخ: {{ req.date_created|date:'d-m-Y' }} </h5>
+        <h5 class="text-muted"> شماره: {{ req.id }}  |  تاریخ: {{ now|date:'d-m-Y' }} </h5>
       </div>
       <div class="col-xs-7">
         <div class="media">
@@ -126,6 +126,34 @@
               <span class="mono"> {{ total_price }} </span>
               <small class="text-muted"> ریال </small>
             </td>
+          </tr>
+
+
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel panel-default" dir="rtl">
+      <table class="table table-bordered table-condensed">
+        <thead>
+          <tr>
+            <td class="text-center col-xs-1"> مجموع </td>
+            <td class="text-center col-xs-1">  مبلغ دریافتی </td>
+            <td class="text-center col-xs-1"> مانده </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="text-center rowtotal mono">
+              <span class="mono"> {{ total_price }} </span> <small class="text-muted"> ریال </small>
+            </th>
+            <th class="text-center rowtotal mono">
+              <span class="mono"> {{ total_incoming }} </span> <small class="text-muted"> ریال </small>
+            </th>
+            <th class="text-center rowtotal mono">
+              <span class="mono"> {{ remained }} </span> <small class="text-muted"> ریال </small>
+            </th>
           </tr>
         </tbody>
       </table>
