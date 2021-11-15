@@ -6,6 +6,7 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin, ImportExportMixin
 from jalali_date import datetime2jalali, date2jalali
 from jalali_date.admin import ModelAdminJalaliMixin, StackedInlineJalaliMixin, TabularInlineJalaliMixin
+from .actions import export_as_csv_action
 
 
 admin.site.site_header= " آتـــروتـک "
@@ -23,6 +24,7 @@ class ProductAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('name', 'price', 'short_description', 'image_tag', 'available')
     list_filter = ("available","date_created")
     search_fields = ['name',]
+    actions = [export_as_csv_action("CSV خروجی", fields=['id','available', 'name', 'inventory', 'price', 'description', 'image' ])]
 
 admin.site.register(models.Product, ProductAdmin)
 
@@ -38,6 +40,8 @@ class CustomerAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_filter = ("date_created", "product_tag")
     search_fields = ['name',]
     raw_id_fields = ('product_tag',)
+    actions = [export_as_csv_action("CSV خروجی", fields=['id', 'name', 'phone', 'company', 'address', 'additional_information', 'substantial' ])]
+
 
 admin.site.register(models.Customer, CustomerAdmin)
 
@@ -58,6 +62,7 @@ class Order_requestAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ['product__name']
     raw_id_fields = ('product', 'user', 'customer')
     inlines = [ Order_incomingsInline, ]
+    actions = [export_as_csv_action("CSV خروجی", fields=['id','user', 'customer', 'product', 'qty', 'description', 'discount', 'status' ])]
 
 
 

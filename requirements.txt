@@ -9,3 +9,4 @@ whitenoise
 Pillow
 django-import-export
 django-jalali-date
+unicodecsv
