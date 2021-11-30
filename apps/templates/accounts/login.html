@@ -29,11 +29,11 @@
 
                   {% csrf_token %}
 
-                  <label>نام کاربری</label>
+                  <label> <p> نام کاربری </p> </label>
                   <div class="mb-3">
                     {{ form.username }}
                   </div>
-                  <label>کلمه عبور</label>
+                  <label> <p> کلمه عبور </p> </label>
                   <div class="mb-3">
                     {{ form.password }}
                   </div>
@@ -57,7 +57,9 @@
         </div>
       </div>
     </div>
-  </section>    <br><br><br>
+  </section>    
+  
+  <br><br><br><br><br>
 
 {% endblock content %}
 

@@ -1,4 +1,5 @@
 {% extends 'layouts/base.html' %}
+{% load humanize %}
 
 {% block title %} محصولات {% endblock title %}
 
@@ -19,7 +20,7 @@
                    <p class="text-lg mb-1 pt-2"><small> محصول </small></p>
                    <h4 class="font-weight-bolder"> {{ product.name }}  </h4>
                    <p class="mb-5"> {{ product.description|linebreaks }} </p>
-                   <h5 class="font-weight-bolder"> قیمت: {{ product.price }}  ریال </h5>
+                   <h5 class="font-weight-bolder"> قیمت: {{ product.price|intcomma:False }}  ریال </h5>
                    <br>
                    {% if product.available %}
                    <p>

@@ -12,6 +12,7 @@
 <body>
 
 
+{% load humanize %}
 {% load jalali_tags %}
 
 
@@ -115,7 +116,7 @@
               <small class="text-muted"> عدد </small>
             </td>
             <td class="text-center">
-              <span class="mono"> {{ req.product.price }} </span>
+              <span class="mono"> {{ req.product.price|floatformat:0|intcomma:False }} </span>
               <small class="text-muted"> ریال </small>
             </td>
             <td class="text-center">
@@ -123,7 +124,7 @@
               <small class="text-muted"> % </small>
             </td>
             <td class="text-center">
-              <span class="mono"> {{ total_price }} </span>
+              <span class="mono"> {{ total_price|floatformat:0|intcomma:False }} </span>
               <small class="text-muted"> ریال </small>
             </td>
           </tr>
@@ -146,13 +147,13 @@
         <tbody>
           <tr>
             <th class="text-center rowtotal mono">
-              <span class="mono"> {{ total_price }} </span> <small class="text-muted"> ریال </small>
+              <span class="mono"> {{ total_price|floatformat:0|intcomma:False }} </span> <small class="text-muted"> ریال </small>
             </th>
             <th class="text-center rowtotal mono">
-              <span class="mono"> {{ total_incoming }} </span> <small class="text-muted"> ریال </small>
+              <span class="mono"> {{ total_incoming|floatformat:0|intcomma:False }} </span> <small class="text-muted"> ریال </small>
             </th>
             <th class="text-center rowtotal mono">
-              <span class="mono"> {{ remained }} </span> <small class="text-muted"> ریال </small>
+              <span class="mono"> {{ remained|floatformat:0|intcomma:False }} </span> <small class="text-muted"> ریال </small>
             </th>
           </tr>
         </tbody>
